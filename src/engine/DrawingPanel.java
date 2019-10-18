@@ -53,7 +53,11 @@ public class DrawingPanel extends JPanel {
 		this.height = painter.getHeight();
 		this.setPreferredSize(new Dimension(this.width, this.height));
 		this.painter=painter;
+<<<<<<< HEAD
      
+=======
+
+>>>>>>> eed404201019cf359eb3b81e5c7a420e31792d8d
 		// cree l'image buffer et son graphics
 		this.nextImage = new BufferedImage(width, height,
 				BufferedImage.TYPE_INT_RGB);
