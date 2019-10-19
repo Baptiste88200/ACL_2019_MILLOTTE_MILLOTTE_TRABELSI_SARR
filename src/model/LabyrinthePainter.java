@@ -17,14 +17,17 @@ public class LabyrinthePainter implements GamePainter {
 	/**
 	 * la taille des cases
 	 */
-	protected static final int WIDTH = 100;
-	protected static final int HEIGHT = 100;
+
+
+
+	private Labyrinthe labyrinthe;
 
 	/**
 	 * appelle constructeur parent
 	 *
 	 */
-	public LabyrinthePainter() {
+	public LabyrinthePainter(Labyrinthe l) {
+		labyrinthe = l;
 	}
 
 	/**
@@ -32,19 +35,22 @@ public class LabyrinthePainter implements GamePainter {
 	 */
 	@Override
 	public void draw(BufferedImage im) {
-		Graphics2D crayon = (Graphics2D) im.getGraphics();
-		crayon.setColor(Color.blue);
-		crayon.fillOval(0,0,10,10);
+		Graphics2D g = (Graphics2D) im.getGraphics();
+		for(int i = 0 ; i < labyrinthe.getWidth() ; i++){
+			for(int j = 0 ; j < labyrinthe.getHeight() ; j++){
+				labyrinthe.getCase(i,j).afficher(g,i,j);
+			}
+		}
 	}
 
 	@Override
 	public int getWidth() {
-		return WIDTH;
+		return Constantes.tailleCase*labyrinthe.getWidth();
 	}
 
 	@Override
 	public int getHeight() {
-		return HEIGHT;
+		return Constantes.tailleCase*labyrinthe.getHeight();
 	}
 
 }

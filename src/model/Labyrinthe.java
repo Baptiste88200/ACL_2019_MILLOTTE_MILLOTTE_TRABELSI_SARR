@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import engine.Cmd;
 import engine.Game;
+import model.cases.Case;
+import model.creationLabyrinthe.CreationLabyrinthe;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -16,22 +18,11 @@ import engine.Game;
  */
 public class Labyrinthe implements Game {
 
-	/**
-	 * constructeur avec fichier source pour le help
-	 * 
-	 */
-	public Labyrinthe(String source) {
-		BufferedReader helpReader;
-		try {
-			helpReader = new BufferedReader(new FileReader(source));
-			String ligne;
-			while ((ligne = helpReader.readLine()) != null) {
-				System.out.println(ligne);
-			}
-			helpReader.close();
-		} catch (IOException e) {
-			System.out.println("Help not available");
-		}
+	private Case[][] cases;
+
+	public Labyrinthe(CreationLabyrinthe cl, int largeur, int hauteur) {
+		cases = cl.creerLabyrinthe(largeur,hauteur);
+
 	}
 
 	/**
@@ -41,7 +32,7 @@ public class Labyrinthe implements Game {
 	 */
 	@Override
 	public void evolve(Cmd commande) {
-		System.out.println("Execute "+commande);
+
 	}
 
 	/**
@@ -51,6 +42,18 @@ public class Labyrinthe implements Game {
 	public boolean isFinished() {
 		// le jeu n'est jamais fini
 		return false;
+	}
+
+	public Case getCase(int x, int y){
+		return cases[x][y];
+	}
+
+	public int getWidth() {
+		return cases.length;
+	}
+
+	public int getHeight() {
+		return cases[0].length;
 	}
 
 }
