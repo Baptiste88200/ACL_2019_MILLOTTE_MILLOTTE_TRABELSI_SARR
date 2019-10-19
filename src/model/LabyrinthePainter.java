@@ -41,6 +41,7 @@ public class LabyrinthePainter implements GamePainter {
 				labyrinthe.getCase(i,j).afficher(g,i,j);
 			}
 		}
+		labyrinthe.getHero().afficher(g);
 	}
 
 	@Override

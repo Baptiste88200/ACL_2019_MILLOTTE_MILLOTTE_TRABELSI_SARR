@@ -42,12 +42,25 @@ public class HeroController implements GameController {
 	 */
 	public void keyPressed(KeyEvent e) {
 
-		switch (e.getKeyChar()) {
-		// si on appuie sur 'q',commande joueur est gauche
-		case 'l':
-		case 'L':
-			this.commandeEnCours = Cmd.LEFT;
-			break;
+		switch (e.getKeyCode()){
+			case (KeyEvent.VK_DOWN):
+			case (KeyEvent.VK_S):
+				commandeEnCours = Cmd.DOWN;
+				break;
+			case (KeyEvent.VK_UP):
+			case (KeyEvent.VK_Z):
+				commandeEnCours = Cmd.UP;
+				break;
+			case(KeyEvent.VK_RIGHT):
+			case (KeyEvent.VK_Q):
+				commandeEnCours = Cmd.RIGHT;
+				break;
+			case (KeyEvent.VK_LEFT):
+			case (KeyEvent.VK_D):
+				commandeEnCours = Cmd.LEFT;
+				break;
+
+
 		}
 
 	}

@@ -13,7 +13,6 @@ public class Sol implements Case {
 
     @Override
     public void afficher(Graphics2D g, int x, int y) {
-        System.out.println(x+ " "+y);
         g.setColor(Color.WHITE);
         g.fillRect(x*Constantes.tailleCase,y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);
         g.setColor(Color.BLACK);

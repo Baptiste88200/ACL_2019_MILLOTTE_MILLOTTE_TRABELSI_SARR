@@ -20,9 +20,11 @@ public class Labyrinthe implements Game {
 
 	private Case[][] cases;
 
-	public Labyrinthe(CreationLabyrinthe cl, int largeur, int hauteur) {
-		cases = cl.creerLabyrinthe(largeur,hauteur);
+	private Hero hero;
 
+	public Labyrinthe(CreationLabyrinthe cl, int largeur, int hauteur) {
+		hero = new Hero(0,hauteur/2);
+		cases = cl.creerLabyrinthe(largeur,hauteur);
 	}
 
 	/**
@@ -32,7 +34,24 @@ public class Labyrinthe implements Game {
 	 */
 	@Override
 	public void evolve(Cmd commande) {
-
+		switch (commande){
+			case LEFT:
+				if(hero.getX()!=0 && getCase(hero.getX()-1,hero.getY()).estTraversable())
+					hero.deplacerGauche();
+				break;
+			case RIGHT:
+				if(hero.getX()!= getWidth()-1 && getCase(hero.getX()+1,hero.getY()).estTraversable())
+					hero.deplacerDroite();
+				break;
+			case UP:
+				if(hero.getY()!=0 && getCase(hero.getX(),hero.getY()-1).estTraversable())
+					hero.deplacerHaut();
+				break;
+			case DOWN:
+				if(hero.getY()!=getHeight()-1 && getCase(hero.getX(),hero.getY()+1).estTraversable())
+					hero.deplacerBas();
+				break;
+		}
 	}
 
 	/**
@@ -56,4 +75,7 @@ public class Labyrinthe implements Game {
 		return cases[0].length;
 	}
 
+	public Hero getHero() {
+		return hero;
+	}
 }
