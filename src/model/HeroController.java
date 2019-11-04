@@ -52,11 +52,11 @@ public class HeroController implements GameController {
 				commandeEnCours = Cmd.UP;
 				break;
 			case(KeyEvent.VK_RIGHT):
-			case (KeyEvent.VK_Q):
+			case (KeyEvent.VK_D):
 				commandeEnCours = Cmd.RIGHT;
 				break;
 			case (KeyEvent.VK_LEFT):
-			case (KeyEvent.VK_D):
+			case (KeyEvent.VK_Q):
 				commandeEnCours = Cmd.LEFT;
 				break;
 

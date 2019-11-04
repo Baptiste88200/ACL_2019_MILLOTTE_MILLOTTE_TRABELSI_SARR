@@ -18,6 +18,7 @@ public class Hero {
 
     public void deplacerGauche(){
         x--;
+
     }
 
     public void deplacerDroite(){

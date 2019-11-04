@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import engine.GamePainter;
+import model.monstres.Monstre;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -42,6 +43,9 @@ public class LabyrinthePainter implements GamePainter {
 			}
 		}
 		labyrinthe.getHero().afficher(g);
+		for(Monstre monstre : labyrinthe.getMonstres()){
+			monstre.afficher(g);
+		}
 	}
 
 	@Override

@@ -6,9 +6,19 @@ import java.awt.*;
 
 public class Sol implements Case {
 
+    private boolean traversable;
+
+    public Sol(){
+        traversable = true;
+    }
+
+    public void setTraversable(boolean traversable) {
+        this.traversable = traversable;
+    }
+
     @Override
     public boolean estTraversable() {
-        return true;
+        return traversable;
     }
 
     @Override

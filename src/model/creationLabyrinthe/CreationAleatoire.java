@@ -12,6 +12,7 @@ public class CreationAleatoire implements CreationLabyrinthe {
         boolean[][] tab = new boolean[largeur][hauteur];
 
         int k = 0, max = largeur*hauteur*3, x = 0, y =hauteur/2, rand;
+        tab[x][y] = true;
         while (k<max){
             rand = (int)(Math.random()*4);
             switch (rand){
