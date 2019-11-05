@@ -30,10 +30,13 @@ public class Labyrinthe implements Game {
 
 	private Collection<Monstre> monstres;
 
+	private boolean finish;
+
 	public Labyrinthe(CreationLabyrinthe cl, int largeur, int hauteur) {
 		hero = new Hero(0,hauteur/2);
-		cases = cl.creerLabyrinthe(largeur,hauteur);
+		cases = cl.creerLabyrinthe(largeur,hauteur,this);
 		((Sol)cases[0][hauteur/2]).setTraversable(false);
+		finish = false;
 		monstres = new ArrayList<>();
 		for(int i = 0; i < 10; i++){
 			creerMonstreVert();
@@ -83,6 +86,9 @@ public class Labyrinthe implements Game {
 			m.deplacer();
 		}
 
+		((Sol)cases[hero.getX()][hero.getY()]).declancher();
+
+
 	}
 
 	/**
@@ -90,8 +96,7 @@ public class Labyrinthe implements Game {
 	 */
 	@Override
 	public boolean isFinished() {
-		// le jeu n'est jamais fini
-		return false;
+		return finish;
 	}
 
 	public Case getCase(int x, int y){
@@ -141,5 +146,9 @@ public class Labyrinthe implements Game {
 	public void creerMonstreVert(){
 		int[] pos = getCordTraversable();
 		ajouterMonstre(new MonstreVert(pos[0], pos[1], this));
+	}
+
+	public void setFinish(boolean finish) {
+		this.finish = finish;
 	}
 }
