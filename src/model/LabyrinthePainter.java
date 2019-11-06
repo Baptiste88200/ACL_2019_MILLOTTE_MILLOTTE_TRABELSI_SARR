@@ -5,6 +5,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import engine.GamePainter;
+import model.cases.Sol;
+import model.cases.SpecialCase;
 import model.monstres.Monstre;
 
 /**
@@ -37,8 +39,15 @@ public class LabyrinthePainter implements GamePainter {
 	@Override
 	public void draw(BufferedImage im) {
 		Graphics2D g = (Graphics2D) im.getGraphics();
+
 		for(int i = 0 ; i < labyrinthe.getWidth() ; i++){
 			for(int j = 0 ; j < labyrinthe.getHeight() ; j++){
+
+				if(labyrinthe.getCase(i,j) instanceof SpecialCase&&labyrinthe.isSpecial(i,j) )
+				{
+					((SpecialCase)labyrinthe.getCase(i,j )).setType(labyrinthe.getTypeCase(i,j));
+
+				}
 				labyrinthe.getCase(i,j).afficher(g,i,j);
 			}
 		}
@@ -46,6 +55,7 @@ public class LabyrinthePainter implements GamePainter {
 		for(Monstre monstre : labyrinthe.getMonstres()){
 			monstre.afficher(g);
 		}
+
 	}
 
 	@Override

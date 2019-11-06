@@ -3,9 +3,7 @@ package model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 import engine.Cmd;
 import engine.Game;
@@ -23,22 +21,23 @@ import model.monstres.MonstreVert;
  * 
  */
 public class Labyrinthe implements Game {
-
+    private static  int NBMONSTRE=2;
 	private Case[][] cases;
-
 	private Hero hero;
-
-	private Collection<Monstre> monstres;
-
+	private HashMap<int[],Integer>caseSpeciales;
+	private List<Monstre> monstres;
 	public Labyrinthe(CreationLabyrinthe cl, int largeur, int hauteur) {
+		caseSpeciales=new HashMap<>();
 		hero = new Hero(0,hauteur/2);
 		cases = cl.creerLabyrinthe(largeur,hauteur);
-		((Sol)cases[0][hauteur/2]).setTraversable(false);
+
+		//((Sol)cases[0][hauteur/2]).setTraversable(false);
+
 		monstres = new ArrayList<>();
-		for(int i = 0; i < 10; i++){
+		for(int i = 0; i < NBMONSTRE; i++){
 			creerMonstreVert();
 		}
-
+		creerCasesSpeciales();
 	}
 
 	/**
@@ -48,43 +47,82 @@ public class Labyrinthe implements Game {
 	 */
 	@Override
 	public void evolve(Cmd commande) {
+		//System.out.println("Hero Score :"+hero.getScore());
 		switch (commande){
 			case LEFT:
 				if(hero.getX()!=0 && getCase(hero.getX()-1,hero.getY()).estTraversable()) {
-					((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
+					//((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
 					hero.deplacerGauche();
-					((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
+					//((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
 				}
 				break;
 			case RIGHT:
 				if(hero.getX()!= getWidth()-1 && getCase(hero.getX()+1,hero.getY()).estTraversable()) {
-					((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
+					//((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
 					hero.deplacerDroite();
-					((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
+					//((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
 				}
 				break;
 			case UP:
 				if(hero.getY()!=0 && getCase(hero.getX(),hero.getY()-1).estTraversable()) {
-					((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
+					//((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
 					hero.deplacerHaut();
-					((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
+					//((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
 				}
 				break;
 			case DOWN:
 				if(hero.getY()!=getHeight()-1 && getCase(hero.getX(),hero.getY()+1).estTraversable()) {
-					((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
+				//	((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
 					hero.deplacerBas();
-					((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
+					//((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
 				}
 				break;
+			case ENTREE:
+				Monstre monstre=getMonstreProche();
+				if(monstre!=null)
+					hero.attaquer(monstre);
+		}
+		if(isSpecial(hero.getX(),hero.getY()))
+		{
+			int type=getTypeCase(hero.getX(), hero.getY());
+			switch (type){
+				case Constantes.PASSAGE:
+					System.out.println("Hero Coord "+hero.getX()+"-"+hero.getY());
+					int[] pos=new int[]{hero.getX(),hero.getY()};
+					while(pos[0]==hero.getX()&&pos[1]==hero.getY()){
+						pos=getCordTraversable();
+					}
+					hero.move(pos[0], pos[1]);
+					System.out.println("Hero Nvell Coord "+hero.getX()+"-"+hero.getY());
+					break;
+				case Constantes.MAGIQUE:
+					//dosomething()
+					break;
+				case Constantes.PIEGE:
+					hero.subirDegat();
+					break;
+				case Constantes.TRESOR:
+					//gameOver
+					System.out.println("Game Over win");
+					break;
+			}
+
 		}
 
+		LinkedList<Integer>MscoreNull=new LinkedList<>();
+		int i=0;
 		for(Monstre m : monstres){
-			m.deplacer();
+			if(!m.enVie())
+				MscoreNull.add(i);
+		 	m.deplacer();
+			//m.deplacer2();
+			i++;
 		}
-
+		for(int j:MscoreNull)
+		{
+			monstres.remove(j);
+		}
 	}
-
 	/**
 	 * verifier si le jeu est fini
 	 */
@@ -126,13 +164,16 @@ public class Labyrinthe implements Game {
 		return cases[x][y].estTraversable();
 	}
 
-	// Retourne les cordonnées d'une case traversable
+	// Retourner les cordonnées d'une case traversable
 	public int[] getCordTraversable(){
-		int x = (int) (Math.random() * cases[0].length);
-		int y = (int) (Math.random() * cases.length);
+		//int x = (int) (Math.random() * cases[0].length);
+		//int y = (int) (Math.random() * cases.length);
+		Random random=new Random();
+		int x=random.nextInt(cases[0].length-2);
+		int y=random.nextInt(cases.length-2);
 		if(estTraversable(x, y)){
-			int[] tab = {x, y};
-			return tab;
+
+			return new int[]{x, y};
 		}else{
 			return getCordTraversable();
 		}
@@ -141,5 +182,95 @@ public class Labyrinthe implements Game {
 	public void creerMonstreVert(){
 		int[] pos = getCordTraversable();
 		ajouterMonstre(new MonstreVert(pos[0], pos[1], this));
+	}
+
+	/**
+	 * generation des cases speciales
+	 */
+	public void creerCasesSpeciales()
+	{
+		Random random=new Random();
+	    //generer un nombre aleatoire entre une  case Tresor
+		setCasepeciale(1,Constantes.TRESOR);
+		//generer un nombre aleatoire entre 0 et3 de case Magique
+		setCasepeciale(random.nextInt(3),Constantes.MAGIQUE);
+		 //generer un nombre aleatoire entre 0 et3 de case piege
+		setCasepeciale(random.nextInt(3),Constantes.PIEGE);
+		//generer un nombre aleatoire entre 0 et3 de case passage
+		setCasepeciale(random.nextInt(6),Constantes.PASSAGE);
+	}
+
+	/**
+	 * definir un nombre de cases speciales de type  [PASSAGE,MAGIQUE,PIEGE,TRESOR]
+	 * @param i le nombre de cases speciales a definir
+	 * @param type [PASSAGE,MAGIQUE,PIEGE,TRESOR]
+	 */
+	public void setCasepeciale(int i,int type)
+	{
+		while(i>0) {
+		int[] pos = getCordTraversable();
+			if (!isSpecial(pos[0], pos[1])) {
+				caseSpeciales.put(pos,type);
+				i--;
+			}
+		}
+	}
+
+	/**
+	 * @param x coord a l'abs
+	 * @param y coord a l'ord
+	 * @return True si la case special False sinon
+	 */
+	public boolean isSpecial(int x,int y)
+	{
+		int[] pos={x,y};
+		Set<int[]>coords=caseSpeciales.keySet();
+		for(int[] p :coords){
+			if(p[0]==pos[0]&&p[1]==pos[1])
+				return true;
+
+		}
+
+		return false;
+	}
+	public List<int[]> getCasesSpeciales()
+	{
+		//(x,y,type de la case)
+		ArrayList<int[]>positions=new ArrayList<>();
+		Set<int[]>coords=caseSpeciales.keySet();
+		 for(int[] p :coords){
+		 	int[]c=new int[3];
+		 	c[0]=p[0];//recuv X
+		 	c[1]=p[1];//y
+		 	c[2]=caseSpeciales.get(p);//type case (MAGIQUE,PIEGE,TRESOR)
+			 positions.add(c);
+		 }
+		 return positions;
+	}
+	public int getTypeCase(int x,int y)
+	{
+		Set<int[]>coords=caseSpeciales.keySet();
+		for(int[] p :coords){
+			if(p[0]==x&&p[1]==y)
+				return caseSpeciales.get(p);
+		}
+		return -1;
+	}
+	public Monstre getMonstreProche()
+	{
+		int [][]tab=new int[][]{
+				{0,0},
+				{1,0},
+				{-1,0},
+				{0,1},
+				{0,-1}
+		};
+		for(Monstre m:monstres){
+		   for(int[] c:tab){
+		   	if(hero.getX()+c[0]==m.getX()&&hero.getY()+c[1]==m.getY())
+		   		return m;
+		   }
+		}
+		return null;
 	}
 }

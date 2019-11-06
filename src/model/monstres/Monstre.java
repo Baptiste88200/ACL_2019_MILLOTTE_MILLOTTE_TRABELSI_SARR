@@ -5,23 +5,29 @@ import model.Labyrinthe;
 import model.cases.Sol;
 
 import java.awt.*;
+import java.util.Arrays;
 
 public abstract class Monstre {
 
     protected int x, y;
+    protected  int score=10;
     protected Labyrinthe labyrinthe;
+    protected Move move;
 
     public Monstre(int x, int y, Labyrinthe labyrinthe) {
         this.x = x;
         this.y = y;
         this.labyrinthe = labyrinthe;
-        ((Sol) this.labyrinthe.getCase(x,y)).setTraversable(false);
+      //  ((Sol) this.labyrinthe.getCase(x,y)).setTraversable(false);??????
     }
-
+    public boolean enVie()
+    {
+        return score>0;
+    }
     public abstract void afficher(Graphics2D g);
 
     public void deplacer(){
-        boolean fini = false;
+       // boolean fini = false;
         int direction;
 
             direction = (int) (Math.random() * 4);
@@ -52,10 +58,43 @@ public abstract class Monstre {
                         ((Sol)labyrinthe.getCase(x, y)).setTraversable(true);
                         x++;
                         ((Sol)labyrinthe.getCase(x, y)).setTraversable(false);
-                        fini = true;
+                        //fini = true;
                     }
                     break;
             }
 
+    }
+    public void deplacer2()
+    {
+
+        move=new MoveAEtoile(labyrinthe, this);
+        int[] pos=move.deplacer();
+        x=pos[0];
+        y=pos[1];
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+    public void subirDegat()
+    {
+        System.out.println("Score:"+score);
+        score--;
+    }
+    public int getScore()
+    {
+        return score;
     }
 }
