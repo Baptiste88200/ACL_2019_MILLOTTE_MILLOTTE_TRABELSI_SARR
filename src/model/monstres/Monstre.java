@@ -1,12 +1,13 @@
 package model.monstres;
 
-import model.Constantes;
 import model.Labyrinthe;
+import model.Personnage;
 import model.cases.Sol;
 
 import java.awt.*;
+import java.sql.SQLOutput;
 
-public abstract class Monstre {
+public abstract class Monstre implements Personnage {
 
     protected int x, y;
     protected Labyrinthe labyrinthe;
@@ -21,7 +22,6 @@ public abstract class Monstre {
     public abstract void afficher(Graphics2D g);
 
     public void deplacer(){
-        boolean fini = false;
         int direction;
 
             direction = (int) (Math.random() * 4);
@@ -52,10 +52,22 @@ public abstract class Monstre {
                         ((Sol)labyrinthe.getCase(x, y)).setTraversable(true);
                         x++;
                         ((Sol)labyrinthe.getCase(x, y)).setTraversable(false);
-                        fini = true;
                     }
                     break;
             }
+        ((Sol)labyrinthe.getCase(x, y)).declancher(this);
 
+    }
+
+    @Override
+    public void teleporterAleatoirement() {
+        int[] cord = labyrinthe.getCordTraversable();
+        x = cord[0];
+        y = cord[1];
+    }
+
+    @Override
+    public void subirDegat(int d) {
+        // a completer
     }
 }

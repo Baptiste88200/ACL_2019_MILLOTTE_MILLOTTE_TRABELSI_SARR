@@ -1,28 +1,25 @@
 package model.cases;
 
 import model.Constantes;
-import model.Hero;
 import model.Labyrinthe;
 import model.Personnage;
 
 import java.awt.*;
 
-public class Tresor extends Sol {
+public class Piege extends Sol {
 
-    private Labyrinthe labyrinthe;
+    public Piege(){
 
-    public Tresor(Labyrinthe l){
-      labyrinthe = l;
     }
 
     @Override
     public void declancher(Personnage p){
-        if(p instanceof Hero) labyrinthe.setFinish(true);
+        p.subirDegat(1);
     }
 
     @Override
     public void afficher(Graphics2D g, int x, int y) {
-        g.setColor(Color.YELLOW);
+        g.setColor(Color.gray);
         g.fillRect(x* Constantes.tailleCase,y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);
         g.setColor(Color.BLACK);
         g.drawRect(x*Constantes.tailleCase,y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);

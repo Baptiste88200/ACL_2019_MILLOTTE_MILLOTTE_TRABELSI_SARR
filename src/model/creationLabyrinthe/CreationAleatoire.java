@@ -1,10 +1,7 @@
 package model.creationLabyrinthe;
 
 import model.Labyrinthe;
-import model.cases.Case;
-import model.cases.Mur;
-import model.cases.Sol;
-import model.cases.Tresor;
+import model.cases.*;
 
 public class CreationAleatoire implements CreationLabyrinthe {
 
@@ -42,7 +39,14 @@ public class CreationAleatoire implements CreationLabyrinthe {
         for(int i = 0 ; i < largeur ; i++){
             for(int j = 0 ; j < hauteur ; j++){
                 if(tab[i][j]){
-                    labyrinthe[i][j] = new Sol();
+                    double r = Math.random();
+                    if(r<0.01) {
+                        labyrinthe[i][j] = new Piege();
+                    }else if(r<0.02) {
+                        labyrinthe[i][j] = new CaseMagique();
+                    }else{
+                        labyrinthe[i][j] = new Sol();
+                    }
                 }else {
                     labyrinthe[i][j] = new Mur();
                 }

@@ -33,7 +33,7 @@ public class Labyrinthe implements Game {
 	private boolean finish;
 
 	public Labyrinthe(CreationLabyrinthe cl, int largeur, int hauteur) {
-		hero = new Hero(0,hauteur/2);
+		hero = new Hero(0,hauteur/2,this);
 		cases = cl.creerLabyrinthe(largeur,hauteur,this);
 		((Sol)cases[0][hauteur/2]).setTraversable(false);
 		finish = false;
@@ -86,7 +86,7 @@ public class Labyrinthe implements Game {
 			m.deplacer();
 		}
 
-		((Sol)cases[hero.getX()][hero.getY()]).declancher();
+		((Sol)cases[hero.getX()][hero.getY()]).declancher(hero);
 
 
 	}

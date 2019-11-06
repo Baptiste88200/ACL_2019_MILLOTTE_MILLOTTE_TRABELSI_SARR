@@ -1,6 +1,7 @@
 package model.cases;
 
 import model.Constantes;
+import model.Personnage;
 
 import java.awt.*;
 
@@ -29,6 +30,6 @@ public class Sol implements Case {
         g.drawRect(x*Constantes.tailleCase,y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);
     }
 
-    public void declancher(){}
+    public void declancher(Personnage p){}
 
 }
