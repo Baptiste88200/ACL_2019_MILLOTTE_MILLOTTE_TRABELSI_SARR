@@ -5,6 +5,6 @@ import model.cases.Case;
 
 public interface CreationLabyrinthe {
 
-    public Case[][] creerLabyrinthe(int x, int y, Labyrinthe l);
+    public void creerLabyrinthe(Labyrinthe l);
 
 }

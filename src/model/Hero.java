@@ -9,9 +9,9 @@ public class Hero implements Personnage{
     private int x,y;
     private Labyrinthe labyrinthe;
 
-    public Hero(int x, int y, Labyrinthe l) {
-        this.x = x;
-        this.y = y;
+    public Hero(Labyrinthe l) {
+        this.x = -1;
+        this.y = -1;
         labyrinthe = l;
     }
 
@@ -40,6 +40,14 @@ public class Hero implements Personnage{
 
     public int getY() {
         return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     @Override

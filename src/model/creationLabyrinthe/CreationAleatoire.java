@@ -5,11 +5,21 @@ import model.cases.*;
 
 public class CreationAleatoire implements CreationLabyrinthe {
 
+    private int largeur;
+
+    private int hauteur;
+
+    private Labyrinthe l;
+
+    public CreationAleatoire(int largeur, int hauteur){
+        this.largeur = largeur;
+        this.hauteur = hauteur;
+    }
+
     @Override
-    public Case[][] creerLabyrinthe(int largeur, int hauteur, Labyrinthe l) {
+    public void creerLabyrinthe(Labyrinthe l) {
         Case[][] labyrinthe = new Case[largeur][hauteur];
         boolean[][] tab = new boolean[largeur][hauteur];
-
         int k = 0, max = largeur*hauteur*3, x = 0, y =hauteur/2, rand;
         tab[x][y] = true;
         while (k<max){
@@ -55,6 +65,9 @@ public class CreationAleatoire implements CreationLabyrinthe {
 
         labyrinthe[x][y] = new Tresor(l);
 
-        return labyrinthe;
+        l.setCases(labyrinthe);
+
+        l.setPositionHero(0, hauteur/2);
+
     }
 }

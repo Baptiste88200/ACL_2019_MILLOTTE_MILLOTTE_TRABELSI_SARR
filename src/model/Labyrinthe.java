@@ -32,13 +32,12 @@ public class Labyrinthe implements Game {
 
 	private boolean finish;
 
-	public Labyrinthe(CreationLabyrinthe cl, int largeur, int hauteur) {
-		hero = new Hero(0,hauteur/2,this);
-		cases = cl.creerLabyrinthe(largeur,hauteur,this);
-		((Sol)cases[0][hauteur/2]).setTraversable(false);
+	public Labyrinthe(CreationLabyrinthe cl) {
+		hero = new Hero(this);
+		cl.creerLabyrinthe(this);
 		finish = false;
 		monstres = new ArrayList<>();
-		for(int i = 0; i < 10; i++){
+		for(int i = 0; i < 2; i++){
 			creerMonstreVert();
 		}
 
@@ -115,6 +114,23 @@ public class Labyrinthe implements Game {
 		return hero;
 	}
 
+	public void setCases(Case[][] cases) {
+		this.cases = cases;
+	}
+
+	public void setPositionHero(int x, int y){
+		if(cases[x][y].estTraversable()){
+			if(hero.getX() >= 0 && hero.getY() >= 0){
+				((Sol)cases[hero.getX()][hero.getY()]).setTraversable(true);
+			}
+			hero.setX(x);
+			hero.setY(y);
+			((Sol)cases[x][y]).setTraversable(false);
+		}
+
+	}
+
+
 	public Collection<Monstre> getMonstres() {
 		return monstres;
 	}
@@ -133,8 +149,9 @@ public class Labyrinthe implements Game {
 
 	// Retourne les cordonnées d'une case traversable
 	public int[] getCordTraversable(){
-		int x = (int) (Math.random() * cases[0].length);
-		int y = (int) (Math.random() * cases.length);
+		int x = (int) (Math.random() * cases.length);
+		int y = (int) (Math.random() * cases[0].length);
+
 		if(estTraversable(x, y)){
 			int[] tab = {x, y};
 			return tab;
