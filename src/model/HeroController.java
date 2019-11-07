@@ -41,7 +41,6 @@ public class HeroController implements GameController {
 	 * met a jour les commandes en fonctions des touches appuyees
 	 */
 	public void keyPressed(KeyEvent e) {
-
 		switch (e.getKeyCode()){
 			case (KeyEvent.VK_DOWN):
 			case (KeyEvent.VK_S):

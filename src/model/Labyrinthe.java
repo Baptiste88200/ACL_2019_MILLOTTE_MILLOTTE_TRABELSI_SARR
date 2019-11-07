@@ -3,6 +3,9 @@ package model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 import engine.Cmd;
@@ -26,6 +29,8 @@ public class Labyrinthe implements Game {
 	private Hero hero;
 	private HashMap<int[],Integer>caseSpeciales;
 	private List<Monstre> monstres;
+	private boolean finish=false;
+
 	public Labyrinthe(CreationLabyrinthe cl, int largeur, int hauteur) {
 		caseSpeciales=new HashMap<>();
 		hero = new Hero(0,hauteur/2);
@@ -47,7 +52,13 @@ public class Labyrinthe implements Game {
 	 */
 	@Override
 	public void evolve(Cmd commande) {
-		//System.out.println("Hero Score :"+hero.getScore());
+        if(!hero.enVie())
+            finish=!finish;
+        finish=true;
+        for(Monstre monstre:monstres)
+            if(monstre.enVie())
+                finish=false;
+         if(!isFinished())
 		switch (commande){
 			case LEFT:
 				if(hero.getX()!=0 && getCase(hero.getX()-1,hero.getY()).estTraversable()) {
@@ -87,13 +98,11 @@ public class Labyrinthe implements Game {
 			int type=getTypeCase(hero.getX(), hero.getY());
 			switch (type){
 				case Constantes.PASSAGE:
-					System.out.println("Hero Coord "+hero.getX()+"-"+hero.getY());
 					int[] pos=new int[]{hero.getX(),hero.getY()};
 					while(pos[0]==hero.getX()&&pos[1]==hero.getY()){
 						pos=getCordTraversable();
 					}
 					hero.move(pos[0], pos[1]);
-					System.out.println("Hero Nvell Coord "+hero.getX()+"-"+hero.getY());
 					break;
 				case Constantes.MAGIQUE:
 					//dosomething()
@@ -103,19 +112,19 @@ public class Labyrinthe implements Game {
 					break;
 				case Constantes.TRESOR:
 					//gameOver
-					System.out.println("Game Over win");
+					finish=true;
 					break;
 			}
 
 		}
-
+		//System.out.println(getClass().getResource("/img").toString());
 		LinkedList<Integer>MscoreNull=new LinkedList<>();
 		int i=0;
 		for(Monstre m : monstres){
 			if(!m.enVie())
 				MscoreNull.add(i);
-		 	m.deplacer();
-			//m.deplacer2();
+		 	//m.deplacer();
+			m.deplacer2();
 			i++;
 		}
 		for(int j:MscoreNull)
@@ -129,7 +138,7 @@ public class Labyrinthe implements Game {
 	@Override
 	public boolean isFinished() {
 		// le jeu n'est jamais fini
-		return false;
+		return finish;
 	}
 
 	public Case getCase(int x, int y){
@@ -148,7 +157,7 @@ public class Labyrinthe implements Game {
 		return hero;
 	}
 
-	public Collection<Monstre> getMonstres() {
+	public List<Monstre> getMonstres() {
 		return monstres;
 	}
 
@@ -190,8 +199,8 @@ public class Labyrinthe implements Game {
 	public void creerCasesSpeciales()
 	{
 		Random random=new Random();
-	    //generer un nombre aleatoire entre une  case Tresor
-		setCasepeciale(1,Constantes.TRESOR);
+	    //generer  une  case Tresor
+		setCasepeciale(3,Constantes.TRESOR);
 		//generer un nombre aleatoire entre 0 et3 de case Magique
 		setCasepeciale(random.nextInt(3),Constantes.MAGIQUE);
 		 //generer un nombre aleatoire entre 0 et3 de case piege

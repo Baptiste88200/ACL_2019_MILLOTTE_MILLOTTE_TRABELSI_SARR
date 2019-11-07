@@ -1,29 +1,36 @@
 package model.monstres;
 
-import model.Constantes;
 import model.Labyrinthe;
+import model.Personnage;
 import model.cases.Sol;
 
 import java.awt.*;
-import java.util.Arrays;
-
-public abstract class Monstre {
+import static model.Constantes.*;
+public abstract class Monstre implements Personnage {
 
     protected int x, y;
-    protected  int score=10;
+    protected  int score;
     protected Labyrinthe labyrinthe;
-    protected Move move;
+    protected Deplacement deplacement;
 
     public Monstre(int x, int y, Labyrinthe labyrinthe) {
         this.x = x;
         this.y = y;
         this.labyrinthe = labyrinthe;
+        score=INITIAL_SCORE;//from Class Constantes
       //  ((Sol) this.labyrinthe.getCase(x,y)).setTraversable(false);??????
     }
+    @Override
     public boolean enVie()
     {
         return score>0;
     }
+
+    @Override
+    public void attaquer(Personnage p) {
+        p.subirDegat();
+    }
+
     public abstract void afficher(Graphics2D g);
 
     public void deplacer(){
@@ -67,12 +74,12 @@ public abstract class Monstre {
     public void deplacer2()
     {
 
-        move=new MoveAEtoile(labyrinthe, this);
-        int[] pos=move.deplacer();
+        deplacement =new DeplacementAEtoile(labyrinthe, this);
+        int[] pos= deplacement.deplacer();
         x=pos[0];
         y=pos[1];
     }
-
+    @Override
     public int getX() {
         return x;
     }
@@ -80,7 +87,7 @@ public abstract class Monstre {
     public void setX(int x) {
         this.x = x;
     }
-
+    @Override
     public int getY() {
         return y;
     }
@@ -88,11 +95,12 @@ public abstract class Monstre {
     public void setY(int y) {
         this.y = y;
     }
+    @Override
     public void subirDegat()
     {
-        System.out.println("Score:"+score);
         score--;
     }
+    @Override
     public int getScore()
     {
         return score;

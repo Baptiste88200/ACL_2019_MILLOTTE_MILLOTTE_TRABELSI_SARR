@@ -2,7 +2,10 @@ package model.cases;
 
 import model.Constantes;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.IOException;
+import java.net.URL;
 
 public class Sol implements SpecialCase {
 
@@ -23,14 +26,14 @@ public class Sol implements SpecialCase {
 
     @Override
     public void afficher(Graphics2D g, int x, int y) {
-
+        URL url=null;
         switch (type)
         {
             case Constantes.TRESOR:
-                g.setColor(Constantes.TRESOR_COLOR);
+                url=getClass().getResource("/"+Constantes.IMAGE_TRESOR);
                 break;
             case Constantes.MAGIQUE:
-                g.setColor(Constantes.MAGIQUE_COLOR);
+                url=getClass().getResource("/"+Constantes.IMAGE_MAGIQUE);
                 break;
             case Constantes.PIEGE:
                 g.setColor(Constantes.PIEGE_COLOR);
@@ -42,9 +45,19 @@ public class Sol implements SpecialCase {
                 g.setColor(Color.WHITE);
                 break;
         }
-        g.fillRect(x*Constantes.tailleCase,y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);
-        g.setColor(Color.BLACK);
-        g.drawRect(x*Constantes.tailleCase,y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);
+        if(url==null) {
+            g.fillRect(x * Constantes.tailleCase, y * Constantes.tailleCase, Constantes.tailleCase, Constantes.tailleCase);
+            g.setColor(Color.BLACK);
+            g.drawRect(x * Constantes.tailleCase, y * Constantes.tailleCase, Constantes.tailleCase, Constantes.tailleCase);
+        }else {
+            int i=x*Constantes.tailleCase;
+            int j=y*Constantes.tailleCase;
+            try {
+                g.drawImage(ImageIO.read(url),i,j ,Constantes.tailleCase,Constantes.tailleCase,null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
