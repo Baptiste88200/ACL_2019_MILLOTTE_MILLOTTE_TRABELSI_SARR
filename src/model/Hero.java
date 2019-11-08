@@ -1,127 +1,126 @@
 package model;
 
-import model.monstres.Monstre;
-
 import javax.imageio.ImageIO;
-import javax.swing.*;
-
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-public class Hero implements Personnage{
-
-    private int x,y;
+public class Hero
+        implements Personnage {
+    private int x;
+    private int y;
     private int score;
-    private enum DIRECTION{HAUT,BAS,GAUCHE,DROITE};
     private DIRECTION d;
+
+    private enum DIRECTION {
+        HAUT, BAS, GAUCHE, DROITE;
+    }
 
     public Hero(int x, int y) {
         this.x = x;
         this.y = y;
-        d=DIRECTION.DROITE;
+        this.d = DIRECTION.DROITE;
+        System.out.println("Direction " + this.d.toString());
     }
 
-    public void afficher(Graphics2D g){
+    public void afficher(Graphics2D g) {
         g.setColor(Color.RED);
-        //g.fillOval(x*Constantes.tailleCase, y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);
-        g.setFont(new Font("TimesRoman", Font.BOLD+Font.ITALIC, 13));
-        g.drawString("Score:"+score+" Tresor:"+0+" magique :"+0, 10, 15);
-        URL url=getClass().getResource("/"+Constantes.IMAGE_HERO_D);
-        switch (d){
+        g.setFont(new Font("TimesRoman", 3, 13));
+        g.drawString("Score:" + this.score + " Tresor:" + Character.MIN_VALUE + " magique :" + Character.MIN_VALUE, 10, 15);
+        URL url = getClass().getResource("/img/heroDROITE.png");
+        switch (this.d) {
             case GAUCHE:
-                url=getClass().getResource("/"+Constantes.IMAGE_HERO_G);
+                url = getClass().getResource("/img/heuroGAUCHE.png");
                 break;
             case DROITE:
-                url=getClass().getResource("/"+Constantes.IMAGE_HERO_D);
+                url = getClass().getResource("/img/heroDROITE.png");
                 break;
             case HAUT:
-                url=getClass().getResource("/"+Constantes.IMAGE_HERO_H);
+                url = getClass().getResource("/img/heroHAUT.png");
                 break;
             case BAS:
-                url=getClass().getResource("/"+Constantes.IMAGE_HERO_B);
+                url = getClass().getResource("/img/heroBAS.png");
                 break;
-
         }
-            int i=x*Constantes.tailleCase;
-            int j=y*Constantes.tailleCase;
+
+        int i = this.x * 40;
+        int j = this.y * 40;
         try {
-            g.drawImage(ImageIO.read(url),i,j ,Constantes.tailleCase,Constantes.tailleCase,null);
+            g.drawImage(ImageIO.read(url), i, j, 40, 40, null);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public void move(int x,int y)
-    {
-        this.x=x;
-        this.y=y;
-    }
-    public void deplacerGauche(){
-        x--;
-        d=DIRECTION.GAUCHE;
+
+    public void move(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
-    public void deplacerDroite(){
-        x++;
-        d=DIRECTION.DROITE;
+    public void deplacerGauche() {
+        this.x--;
+        this.d = DIRECTION.GAUCHE;
     }
 
-    public void deplacerHaut(){
-        y--;
-        d=DIRECTION.HAUT;
+    public void deplacerDroite() {
+        this.x++;
+        this.d = DIRECTION.DROITE;
     }
 
-    public void deplacerBas(){
-        y++;
-        d=DIRECTION.BAS;
+    public void deplacerHaut() {
+        this.y--;
+        this.d = DIRECTION.HAUT;
     }
+
+    public void deplacerBas() {
+        this.y++;
+        this.d = DIRECTION.BAS;
+    }
+
 
     public int getX() {
-        return x;
+        return this.x;
     }
 
+
     public int getY() {
-        return y;
+        return this.y;
     }
-    public int getScore()
-    {
-        return score;
+
+
+    public int getScore() {
+        return this.score;
     }
-    @Override
-    public void attaquer(Personnage monstre)
-    {
-        int [][]tab=new int[][]{
-                {0,0},
-                {1,0},
-                {-1,0},
-                {0,1},
-                {0,-1}
-        };
-        //les monstres est dans une case adj
-        for(int[] c:tab) {
+
+
+    public void attaquer(Personnage monstre) {
+        int[][] tab = {{0, 0}, {1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+
+        for (int[] c : tab) {
             if (getX() + c[0] == monstre.getX() && getY() + c[1] == getY()) {
                 monstre.subirDegat();
                 break;
             }
         }
-        if (monstre.getX() == x && monstre.getY() == y)
+        if (monstre.getX() == this.x && monstre.getY() == this.y) {
             subirDegat();
-
-    }
-    @Override
-    public void subirDegat()
-    {
-        score--;
+        }
     }
 
-    @Override
+
+    public void subirDegat() {
+        this.score--;
+    }
+
+
     public boolean enVie() {
-        return score>0;
+        return (this.score > 0);
     }
-
-
-
-
 }
+
+
+/* Location:              /home/mobis/Bureau/ACL_2019_MILLOTTE_MILLOTTE_TRABELSI_SARR/!/model/Hero.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.1
+ */

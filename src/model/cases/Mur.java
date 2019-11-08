@@ -1,35 +1,34 @@
 package model.cases;
 
-import model.Constantes;
-
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-public class Mur implements Case {
 
-    @Override
+public class Mur
+        implements Case {
+    
     public boolean estTraversable() {
         return false;
     }
 
-    @Override
+
     public void afficher(Graphics2D g, int x, int y) {
-        //g.setColor(Color.BLACK);
-       // g.fillRect(x*Constantes.tailleCase,y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);
-        //g.drawImage(ImageIO.read())*/
-        URL url=getClass().getResource("/"+Constantes.IMAGE_MUR);
-        int i=x*Constantes.tailleCase;
-        int j=y*Constantes.tailleCase;
+        
+        URL url = getClass().getResource("/img/mur.jpeg");
+        
+        int i = x * 40;
+        
+        int j = y * 40;
         try {
-            g.drawImage(ImageIO.read(url),i,j ,Constantes.tailleCase,Constantes.tailleCase,null);
+            
+            g.drawImage(ImageIO.read(url), i, j, 40, 40, null);
+            
         } catch (IOException e) {
+            
             e.printStackTrace();
         }
-       // g.dispose();
     }
 }
+
