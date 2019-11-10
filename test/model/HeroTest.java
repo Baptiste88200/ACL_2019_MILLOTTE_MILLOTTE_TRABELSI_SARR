@@ -4,15 +4,13 @@
  * and open the template in the editor.
  */
 package model;
-
-import java.awt.Graphics2D;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import model.*;
+import static org.junit.Assert.assertTrue;
 import model.creationLabyrinthe.CreationAleatoire;
 import model.creationLabyrinthe.CreationLabyrinthe;
 
@@ -148,83 +146,7 @@ public class HeroTest {
           assertEquals(y,17);//18 is a wall
         
     }
-    /**
-     * Test of getX method, of class Hero.
-     */
-    @Test
-    public void testGetX() {
-        System.out.println("getX");
-        Hero instance = null;
-        int expResult = 0;
-        int result = instance.getX();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getY method, of class Hero.
-     */
-    @Test
-    public void testGetY() {
-        System.out.println("getY");
-        Hero instance = null;
-        int expResult = 0;
-        int result = instance.getY();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setX method, of class Hero.
-     */
-    @Test
-    public void testSetX() {
-        System.out.println("setX");
-        int x = 0;
-        Hero instance = null;
-        instance.setX(x);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setY method, of class Hero.
-     */
-    @Test
-    public void testSetY() {
-        System.out.println("setY");
-        int y = 0;
-        Hero instance = null;
-        instance.setY(y);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of teleporterAleatoirement method, of class Hero.
-     */
-    @Test
-    public void testTeleporterAleatoirement() {
-        System.out.println("teleporterAleatoirement");
-        Hero instance = null;
-        instance.teleporterAleatoirement();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of subirDegat method, of class Hero.
-     */
-    @Test
-    public void testSubirDegat() {
-        System.out.println("subirDegat");
-        int d = 0;
-        Hero instance = null;
-        instance.subirDegat(d);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
     
-}
+  
+}  /**
+ 
