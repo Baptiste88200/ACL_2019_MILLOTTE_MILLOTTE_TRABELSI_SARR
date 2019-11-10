@@ -5,6 +5,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import engine.GamePainter;
+import model.Constantes;
+import model.Labyrinthe;
 import model.monstres.Monstre;
 
 /**

@@ -43,6 +43,10 @@ public class Labyrinthe implements Game {
 
 	}
 
+    Labyrinthe() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 	/**
 	 * faire evoluer le jeu suite a une commande
 	 * 

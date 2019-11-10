@@ -1,10 +1,9 @@
 package start;
 
-import model.LabyrinthePainter;
-import engine.GameEngineGraphical;
 import model.HeroController;
 import model.Labyrinthe;
-import model.creationLabyrinthe.CreationAleatoire;
+import model.LabyrinthePainter;
+import engine.GameEngineGraphical;
 import model.creationLabyrinthe.CreationFichierTexte;
 
 /**
