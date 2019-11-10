@@ -22,7 +22,8 @@ import model.creationLabyrinthe.CreationLabyrinthe;
  */
 public class HeroTest {
     private static CreationLabyrinthe lab;
-    protected static Labyrinthe game;
+    private static Labyrinthe game;
+    
     
     public HeroTest() {
     }
@@ -31,6 +32,7 @@ public class HeroTest {
     public static void setUpClass() {
         lab=new CreationAleatoire(20,20);
         game= new Labyrinthe(lab);
+       
     }
     
     @AfterClass
@@ -39,6 +41,7 @@ public class HeroTest {
     
     @Before
     public void setUp() {
+       
     }
     
     @After
@@ -52,10 +55,11 @@ public class HeroTest {
     @Test
     public void testDeplacerGauche() {
         System.out.println("deplacerGauche");
-        Hero instance = null;
-        instance.deplacerGauche();
+        game.getHero().setX(0);
+        game.getHero().deplacerGauche();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int x = game.getHero().getX();
+        assertEquals(x,-1);
     }
 
     /**
