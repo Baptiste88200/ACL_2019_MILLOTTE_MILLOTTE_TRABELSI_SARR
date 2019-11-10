@@ -68,10 +68,10 @@ public class HeroTest {
     @Test
     public void testDeplacerDroite() {
         System.out.println("deplacerDroite");
-        Hero instance = null;
-        instance.deplacerDroite();
+        game.getHero().deplacerDroite();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int x = game.getHero().getX();
+        assertEquals(x,0);//x=-1 y =-1 initiale
     }
 
     /**
@@ -80,10 +80,11 @@ public class HeroTest {
     @Test
     public void testDeplacerHaut() {
         System.out.println("deplacerHaut");
-        Hero instance = null;
-        instance.deplacerHaut();
+        game.getHero().setY(0);
+        game.getHero().deplacerHaut();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int y = game.getHero().getY();
+        assertEquals(y,-1);
     }
 
     /**
@@ -92,10 +93,10 @@ public class HeroTest {
     @Test
     public void testDeplacerBas() {
         System.out.println("deplacerBas");
-        Hero instance = null;
-        instance.deplacerBas();
+        game.getHero().deplacerBas();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int y = game.getHero().getY();
+        assertEquals(y,0);
     }
 
     /**
