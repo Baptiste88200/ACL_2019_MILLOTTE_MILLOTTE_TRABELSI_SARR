@@ -8,6 +8,8 @@ package model;
 import engine.Cmd;
 import java.util.Collection;
 import model.cases.Case;
+import model.creationLabyrinthe.CreationAleatoire;
+import model.creationLabyrinthe.CreationLabyrinthe;
 import model.monstres.Monstre;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -21,12 +23,15 @@ import static org.junit.Assert.*;
  * @author Work
  */
 public class LabyrintheTest {
-    
+     private static CreationLabyrinthe lab;
+    private static Labyrinthe game;
     public LabyrintheTest() {
     }
-    
-    @BeforeClass
+   @BeforeClass
     public static void setUpClass() {
+        lab=new CreationAleatoire(20,20);
+        game= new Labyrinthe(lab);
+       
     }
     
     @AfterClass
@@ -42,101 +47,22 @@ public class LabyrintheTest {
     }
 
     /**
-     * Test of evolve method, of class Labyrinthe.
-     */
-    @Test
-    public void testEvolve() {
-        System.out.println("evolve");
-        Cmd commande = null;
-        Labyrinthe instance = null;
-        instance.evolve(commande);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of isFinished method, of class Labyrinthe.
-     */
-    @Test
-    public void testIsFinished() {
-        System.out.println("isFinished");
-        Labyrinthe instance = null;
-        boolean expResult = false;
-        boolean result = instance.isFinished();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getCase method, of class Labyrinthe.
-     */
-    @Test
-    public void testGetCase() {
-        System.out.println("getCase");
-        int x = 0;
-        int y = 0;
-        Labyrinthe instance = null;
-        Case expResult = null;
-        Case result = instance.getCase(x, y);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getWidth method, of class Labyrinthe.
-     */
-    @Test
-    public void testGetWidth() {
-        System.out.println("getWidth");
-        Labyrinthe instance = null;
-        int expResult = 0;
-        int result = instance.getWidth();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getHeight method, of class Labyrinthe.
-     */
-    @Test
-    public void testGetHeight() {
-        System.out.println("getHeight");
-        Labyrinthe instance = null;
-        int expResult = 0;
-        int result = instance.getHeight();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of getHero method, of class Labyrinthe.
      */
     @Test
     public void testGetHero() {
         System.out.println("getHero");
-        Labyrinthe instance = null;
-        Hero expResult = null;
-        Hero result = instance.getHero();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Hero hero = game.getHero();
+        assertNotNull(hero);
+       
     }
-
-    /**
-     * Test of setCases method, of class Labyrinthe.
-     */
+    
     @Test
-    public void testSetCases() {
-        System.out.println("setCases");
-        Case[][] cases = null;
-        Labyrinthe instance = null;
-        instance.setCases(cases);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void TestInitialPosition()
+    {
+         System.out.println("InitialPosition Hero");
+        Hero hero = game.getHero();
+        assertTrue(hero.getX()==-1);
     }
 
     /**
@@ -147,92 +73,23 @@ public class LabyrintheTest {
         System.out.println("setPositionHero");
         int x = 0;
         int y = 0;
-        Labyrinthe instance = null;
-        instance.setPositionHero(x, y);
+        game.setPositionHero(x, y);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getMonstres method, of class Labyrinthe.
-     */
-    @Test
-    public void testGetMonstres() {
-        System.out.println("getMonstres");
-        Labyrinthe instance = null;
-        Collection<Monstre> expResult = null;
-        Collection<Monstre> result = instance.getMonstres();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       assertTrue(game.position(x,y));
     }
 
     /**
      * Test of ajouterMonstre method, of class Labyrinthe.
      */
     @Test
-    public void testAjouterMonstre() {
-        System.out.println("ajouterMonstre");
+    public void testAjouterMonstreNull() {
+        System.out.println("ajouterMonstreNull");
         Monstre m = null;
-        Labyrinthe instance = null;
-        instance.ajouterMonstre(m);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        game.ajouterMonstre(m);
+        assertNotNull(m);
     }
 
-    /**
-     * Test of estTraversable method, of class Labyrinthe.
-     */
-    @Test
-    public void testEstTraversable() {
-        System.out.println("estTraversable");
-        int x = 0;
-        int y = 0;
-        Labyrinthe instance = null;
-        boolean expResult = false;
-        boolean result = instance.estTraversable(x, y);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+   
 
-    /**
-     * Test of getCordTraversable method, of class Labyrinthe.
-     */
-    @Test
-    public void testGetCordTraversable() {
-        System.out.println("getCordTraversable");
-        Labyrinthe instance = null;
-        int[] expResult = null;
-        int[] result = instance.getCordTraversable();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of creerMonstreVert method, of class Labyrinthe.
-     */
-    @Test
-    public void testCreerMonstreVert() {
-        System.out.println("creerMonstreVert");
-        Labyrinthe instance = null;
-        instance.creerMonstreVert();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setFinish method, of class Labyrinthe.
-     */
-    @Test
-    public void testSetFinish() {
-        System.out.println("setFinish");
-        boolean finish = false;
-        Labyrinthe instance = null;
-        instance.setFinish(finish);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
     
 }

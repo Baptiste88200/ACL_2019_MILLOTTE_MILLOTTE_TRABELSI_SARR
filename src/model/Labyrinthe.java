@@ -133,7 +133,13 @@ public class Labyrinthe implements Game {
 		}
 
 	}
-
+        public boolean position(int x , int y)
+        {
+            if(hero.getX()==x && hero.getY()==y)
+                    return true;
+            return false;
+        }
+        
 
 	public Collection<Monstre> getMonstres() {
 		return monstres;
@@ -151,7 +157,7 @@ public class Labyrinthe implements Game {
 		return cases[x][y].estTraversable();
 	}
 
-	// Retourne les cordonnées d'une case traversable
+	// Retourne les cordonnÃ©es d'une case traversable
 	public int[] getCordTraversable(){
 		int x = (int) (Math.random() * cases.length);
 		int y = (int) (Math.random() * cases[0].length);
