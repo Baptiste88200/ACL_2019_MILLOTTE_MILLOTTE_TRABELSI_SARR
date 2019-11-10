@@ -1,0 +1,28 @@
+package model.cases;
+
+import model.Constantes;
+import model.Labyrinthe;
+import model.Personnage;
+
+import java.awt.*;
+
+public class Piege extends Sol {
+
+    public Piege(){
+
+    }
+
+    @Override
+    public void declancher(Personnage p){
+        p.subirDegat(1);
+    }
+
+    @Override
+    public void afficher(Graphics2D g, int x, int y) {
+        g.setColor(Color.gray);
+        g.fillRect(x* Constantes.tailleCase,y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);
+        g.setColor(Color.BLACK);
+        g.drawRect(x*Constantes.tailleCase,y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);
+    }
+
+}
