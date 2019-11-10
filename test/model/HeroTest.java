@@ -61,6 +61,19 @@ public class HeroTest {
         int x = game.getHero().getX();
         assertEquals(x,-1);
     }
+    
+     /**
+     * Test of testMurGauche method, of class Hero.
+     */
+    @Test
+    public void testMurGauche()
+    {
+          System.out.println("testMurGauche");
+          game.getHero().deplacerGauche();
+          int x = game.getHero().getX();
+          assertEquals(x,1);
+        
+    }
 
     /**
      * Test of deplacerDroite method, of class Hero.
@@ -73,7 +86,19 @@ public class HeroTest {
         int x = game.getHero().getX();
         assertEquals(x,0);//x=-1 y =-1 initiale
     }
-
+     /**
+     * Test of testMurDroite method, of class Hero.
+     */
+    @Test
+    public void testMurDroite()
+    {
+          System.out.println("testMurDroite");
+          game.getHero().setX(17);
+          game.getHero().deplacerGauche();
+          int x = game.getHero().getX();
+          assertEquals(x,17);//18 is a wall
+        
+    }
     /**
      * Test of deplacerHaut method, of class Hero.
      */
@@ -86,7 +111,18 @@ public class HeroTest {
         int y = game.getHero().getY();
         assertEquals(y,-1);
     }
-
+     /**
+     * Test of testMurHaut method, of class Hero.
+     */
+    @Test
+    public void testMurHaut()
+    {
+          System.out.println("testMurHaut");
+          game.getHero().deplacerHaut();
+          int y = game.getHero().getY();
+          assertEquals(y,-1);
+        
+    }
     /**
      * Test of deplacerBas method, of class Hero.
      */
@@ -98,7 +134,20 @@ public class HeroTest {
         int y = game.getHero().getY();
         assertEquals(y,0);
     }
-
+    
+     /**
+     * Test of testMurBas method, of class Hero.
+     */
+    @Test
+    public void testMurBas()
+    {
+          System.out.println("testMurGauche");
+          game.getHero().setY(17);
+          game.getHero().deplacerGauche();
+          int y = game.getHero().getY();
+          assertEquals(y,17);//18 is a wall
+        
+    }
     /**
      * Test of getX method, of class Hero.
      */
