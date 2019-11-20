@@ -4,6 +4,11 @@ public interface Personnage {
 
     void teleporterAleatoirement();
 
-    void subirDegat(int d);
+    void subirDegat(int degat);
+
+    void attaquer(Personnage p);
+    int getX();
+    int getY();
+    boolean enVie();
 
 }

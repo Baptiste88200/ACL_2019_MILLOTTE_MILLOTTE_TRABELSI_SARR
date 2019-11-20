@@ -3,9 +3,7 @@ package model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 import engine.Cmd;
 import engine.Game;
@@ -83,15 +81,29 @@ public class Labyrinthe implements Game {
 					((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
 				}
 				break;
+			case ENTREE:
+			Monstre	monstre = hero.getMonstreProche();
+				if (monstre != null)
+					this.hero.attaquer((Personnage) monstre);
+				break;
 		}
-
-		for(Monstre m : monstres){
-			m.deplacer();
+		if(monstres.size()==0)
+		{
+			finish=true;
+			return;
+		}
+		Iterator<Monstre> iterator=monstres.iterator();
+		while (iterator.hasNext()){
+			Monstre m=iterator.next();
+			if(m.enVie())
+				m.deplacer();
+			else
+				iterator.remove();
 		}
 
 		((Sol)cases[hero.getX()][hero.getY()]).declancher(hero);
-
-
+		if (!this.hero.enVie())
+			this.finish = !this.finish;
 	}
 
 	/**

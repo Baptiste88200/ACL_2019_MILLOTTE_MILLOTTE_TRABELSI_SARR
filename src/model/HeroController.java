@@ -59,6 +59,9 @@ public class HeroController implements GameController {
 			case (KeyEvent.VK_Q):
 				commandeEnCours = Cmd.LEFT;
 				break;
+			case (KeyEvent.VK_ENTER):
+				commandeEnCours = Cmd.ENTREE;
+				break;
 
 
 		}
