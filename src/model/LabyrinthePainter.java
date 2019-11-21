@@ -64,7 +64,7 @@ public class LabyrinthePainter implements GamePainter {
                 Constantes.tailleCase * labyrinthe.getWidth(), 2 * Constantes.tailleCase);
         g.fillRect(Constantes.tailleCase * labyrinthe.getWidth(), labyrinthe.getHeight() * Constantes.tailleCase,
                 Constantes.tailleCase * labyrinthe.getWidth(), 2 * Constantes.tailleCase);
-
+        
 
     }
 
