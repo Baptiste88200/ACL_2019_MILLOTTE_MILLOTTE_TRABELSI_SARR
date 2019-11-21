@@ -97,6 +97,10 @@ public abstract class Monstre implements Personnage {
     public boolean enVie() {
         return score > 0;
     }
-
+    public int getScore()
+    {
+        return this.score;
+    }
+            
 
 }
