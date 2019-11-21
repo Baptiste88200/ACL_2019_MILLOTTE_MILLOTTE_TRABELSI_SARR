@@ -4,9 +4,18 @@ import model.cases.Sol;
 import model.monstres.Monstre;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 import static model.Constantes.DIRECTION;
 import static model.Constantes.INITIAL_SCORE;
+import model.monstres.MonstreVert;
 
 public class Hero implements Personnage {
 
@@ -29,8 +38,19 @@ public class Hero implements Personnage {
     public void afficher(Graphics2D g) {
 
         if (score > 0) {
-            g.setColor(Color.RED);
-            g.fillOval(x * Constantes.tailleCase, y * Constantes.tailleCase, Constantes.tailleCase, Constantes.tailleCase);
+             BufferedImage buffer = null;
+             Path path = FileSystems.getDefault().getPath(".").toAbsolutePath();
+             try {
+                buffer = ImageIO.read(new File(path.toString()+"/src/model/images/hero.png"));            
+              } catch (IOException ex) {
+            Logger.getLogger(MonstreVert.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+        // g.setColor(Color.GREEN);
+        //g.fillOval(x * Constantes.tailleCase, y * Constantes.tailleCase, Constantes.tailleCase, Constantes.tailleCase);
+         g.drawImage(buffer, x * Constantes.tailleCase, y * Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase,null);
+           // g.setColor(Color.RED);
+           // g.fillOval(x * Constantes.tailleCase, y * Constantes.tailleCase, Constantes.tailleCase, Constantes.tailleCase);
         }
         /*g.setColor(Color.RED);
         g.setFont(new Font("TimesRoman", 3, 13));
