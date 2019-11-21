@@ -15,6 +15,7 @@ public class Hero implements Personnage{
     private Labyrinthe labyrinthe;
     private int score;
     private DIRECTION d;
+    private int degat;
 
 
 
@@ -22,15 +23,18 @@ public class Hero implements Personnage{
         this.x = -1;
         this.y = -1;
         labyrinthe = l;
+        degat = 1;
         this.d = DIRECTION.DROITE;
         score=INITIAL_SCORE;
     }
 
     public void afficher(Graphics2D g){
-        /*
-        g.setColor(Color.RED);
-        g.fillOval(x*Constantes.tailleCase, y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);*/
-        g.setColor(Color.RED);
+
+        if(score > 0) {
+            g.setColor(Color.RED);
+            g.fillOval(x * Constantes.tailleCase, y * Constantes.tailleCase, Constantes.tailleCase, Constantes.tailleCase);
+        }
+        /*g.setColor(Color.RED);
         g.setFont(new Font("TimesRoman", 3, 13));
         g.drawString("Score:" + this.score + " Tresor:" + Character.MIN_VALUE + " magique :" + Character.MIN_VALUE, 10, 15);
         URL url = getClass().getResource("/img/heroDROITE.png");
@@ -55,7 +59,7 @@ public class Hero implements Personnage{
             g.drawImage(ImageIO.read(url), i, j, 40, 40, null);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
     public void deplacerGauche() {
         this.x--;
@@ -106,7 +110,7 @@ public class Hero implements Personnage{
 
         for (int[] c : tab) {
             if (getX() + c[0] == monstre.getX() && getY() + c[1] == getY()) {
-                monstre.subirDegat(0);
+                monstre.subirDegat(degat);
                 break;
             }
         }
@@ -117,12 +121,16 @@ public class Hero implements Personnage{
 
     @Override
     public void subirDegat(int d) {
-        this.score--;
+        this.score -= d;
+        if(score <= 0)
+            labyrinthe.setFinish(true);
     }
+
     @Override
     public  boolean enVie(){
         return score>0;
     }
+
     public Monstre getMonstreProche() {
         int[][] tab = {{0, 0}, {1, 0}, {-1, 0}, {0, 1}, {0, -1}};
         for (Monstre m : this.labyrinthe.getMonstres()) {
@@ -132,6 +140,10 @@ public class Hero implements Personnage{
             }
         }
         return null;
+    }
+
+    public int getPV() {
+        return score;
     }
 
 }

@@ -46,14 +46,12 @@ public class DeplacementAEtoile  extends Deplacement {
         LinkedList<Node> ferme = new LinkedList<>();
 
         Node A = new Node(this.monstre.getX(), this.monstre.getY(), 0);
-        if (distance(monstre.getX(), monstre.getY()) ==0) {
-
+        if (distance(monstre.getX(), monstre.getY()) ==1) {
+            estACoteDuHero = true;
             return new int[]{monstre.getX(), monstre.getY()};
         }
-        if (distance(monstre.getX(), monstre.getY()) ==1) {
 
-            return new int[]{hero.getX(), hero.getY()};
-        }
+        estACoteDuHero = false;
 
         ouvert.push(A);
 

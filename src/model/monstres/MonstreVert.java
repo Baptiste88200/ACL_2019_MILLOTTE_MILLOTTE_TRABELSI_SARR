@@ -17,26 +17,11 @@ public class MonstreVert extends Monstre{
     }
 
     public void afficher(Graphics2D g){
-      /*  g.setColor(Color.GREEN);
-        g.fillOval(x* Constantes.tailleCase, y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);*/
-        URL url = getClass().getResource("/img/monstre.jpg");
 
+        g.setColor(Color.GREEN);
+        g.fillOval(x* Constantes.tailleCase, y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);
 
-        int i = this.x * 40;
-
-        int j = this.y * 40;
-        try {
-            if(url!=null)
-            g.drawImage(ImageIO.read(url), i, j, 40, 40, null);
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
     }
 
-    @Override
-    public void attaquer(Personnage p) {
-        p.subirDegat(0);
-    }
+
 }

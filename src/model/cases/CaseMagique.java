@@ -2,6 +2,7 @@ package model.cases;
 
 import model.Constantes;
 import model.Personnage;
+import model.factory.ImageFactory;
 
 import java.awt.*;
 
@@ -19,10 +20,11 @@ public class CaseMagique extends Sol {
 
     @Override
     public void afficher(Graphics2D g, int x, int y) {
-        g.setColor(Color.MAGENTA);
+        /*g.setColor(Color.MAGENTA);
         g.fillRect(x* Constantes.tailleCase,y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);
         g.setColor(Color.BLACK);
-        g.drawRect(x*Constantes.tailleCase,y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);
+        g.drawRect(x*Constantes.tailleCase,y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);*/
+        g.drawImage(ImageFactory.getCaseMagique(),x*Constantes.tailleCase,y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase,null);
     }
 
 }

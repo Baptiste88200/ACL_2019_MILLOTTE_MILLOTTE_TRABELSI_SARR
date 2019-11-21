@@ -41,10 +41,6 @@ public class Labyrinthe implements Game {
 
 	}
 
-    Labyrinthe() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 	/**
 	 * faire evoluer le jeu suite a une commande
 	 * 
@@ -87,11 +83,7 @@ public class Labyrinthe implements Game {
 					this.hero.attaquer((Personnage) monstre);
 				break;
 		}
-		if(monstres.size()==0)
-		{
-			finish=true;
-			return;
-		}
+
 		Iterator<Monstre> iterator=monstres.iterator();
 		while (iterator.hasNext()){
 			Monstre m=iterator.next();
@@ -102,8 +94,8 @@ public class Labyrinthe implements Game {
 		}
 
 		((Sol)cases[hero.getX()][hero.getY()]).declancher(hero);
-		if (!this.hero.enVie())
-			this.finish = !this.finish;
+		/*if (!this.hero.enVie())
+			this.finish = !this.finish;*/
 	}
 
 	/**
@@ -169,6 +161,10 @@ public class Labyrinthe implements Game {
 		return cases[x][y].estTraversable();
 	}
 
+	public void setTraversable(int x, int y,boolean traversable){
+		((Sol)cases[x][y]).setTraversable(traversable);
+	}
+
 	// Retourne les cordonnÃ©es d'une case traversable
 	public int[] getCordTraversable(){
 		int x = (int) (Math.random() * cases.length);
@@ -190,4 +186,14 @@ public class Labyrinthe implements Game {
 	public void setFinish(boolean finish) {
 		this.finish = finish;
 	}
+
+	public void supprimerLesMonstres(){
+		monstres.removeAll(monstres);
+	}
+
+	public void reinitialiserPositionHero(){
+		hero.setX(-1);
+		hero.setY(-1);
+	}
+
 }

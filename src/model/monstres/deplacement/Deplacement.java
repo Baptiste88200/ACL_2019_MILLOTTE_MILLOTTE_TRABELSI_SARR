@@ -6,15 +6,22 @@ import model.monstres.Monstre;
 public abstract class Deplacement {
     protected Labyrinthe labyrinthe;
     protected Monstre monstre;
+    protected boolean estACoteDuHero;
 
     Deplacement(Labyrinthe labyrinthe, Monstre monstre) {
         /* 11 */
         this.labyrinthe = labyrinthe;
         /* 12 */
         this.monstre = monstre;
+
+        estACoteDuHero = false;
     }
 
     public abstract int[] deplacer();
+
+    public boolean estACoteDuHero(){
+        return estACoteDuHero;
+    }
 }
 
 

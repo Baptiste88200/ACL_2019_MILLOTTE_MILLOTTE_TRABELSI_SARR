@@ -63,7 +63,8 @@ public class CreationAleatoire implements CreationLabyrinthe {
             }
         }
 
-        labyrinthe[x][y] = new Tresor(l);
+        //labyrinthe[x][y] = new Tresor(l);
+        labyrinthe[x][y] = new Passage(l,largeur,hauteur);
 
         l.setCases(labyrinthe);
 

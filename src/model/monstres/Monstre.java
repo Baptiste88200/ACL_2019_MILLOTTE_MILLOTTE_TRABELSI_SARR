@@ -17,27 +17,42 @@ public abstract class Monstre implements Personnage {
     protected Labyrinthe labyrinthe;
     protected Deplacement deplacement;
     protected int score;
+    private int degat;
+    private int vitesse;
+    private int cptVitesse;
 
     public Monstre(int x, int y, Labyrinthe labyrinthe) {
         this.x = x;
         this.y = y;
-        this.score=INITIAL_SCORE;
+        this.score=6;
         this.labyrinthe = labyrinthe;
         ((Sol) this.labyrinthe.getCase(x,y)).setTraversable(false);
-        deplacement=new DeplacementAlea(labyrinthe, this);
+        deplacement=new DeplacementAEtoile(labyrinthe, this);
+        vitesse = 2;
+        cptVitesse = 0;
+        degat = 1;
     }
 
     public abstract void afficher(Graphics2D g);
 
     public void deplacer(){
-        try {
-            Thread.sleep(1000);
-            int[] coord=deplacement.deplacer();
-            this.x=coord[0];
-            this.y=coord[1];
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if(cptVitesse == vitesse) {
+            int[] coord = deplacement.deplacer();
+            if(labyrinthe.estTraversable(coord[0],coord[1])) {
+                labyrinthe.setTraversable(x,y,true);
+                labyrinthe.setTraversable(coord[0],coord[1],false);
+                this.x = coord[0];
+                this.y = coord[1];
+
+            }
+            if(deplacement.estACoteDuHero()){
+                attaquer(labyrinthe.getHero());
+            }
+
+            cptVitesse = -1;
+            ((Sol)(labyrinthe.getCase(x,y))).declancher(this);
         }
+        cptVitesse++;
 
     }
 
@@ -53,7 +68,15 @@ public abstract class Monstre implements Personnage {
 
     @Override
     public void subirDegat(int d) {
-      score--;
+        System.out.println(score);
+      score-=d;
+      if(score <= 0)
+          labyrinthe.setTraversable(x,y,true);
+    }
+
+    @Override
+    public void attaquer(Personnage p) {
+        p.subirDegat(degat);
     }
 
     public int getX() {
@@ -76,4 +99,6 @@ public abstract class Monstre implements Personnage {
     public boolean enVie() {
         return score>0;
     }
+
+
 }

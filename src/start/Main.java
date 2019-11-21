@@ -4,6 +4,7 @@ import model.HeroController;
 import model.Labyrinthe;
 import model.LabyrinthePainter;
 import engine.GameEngineGraphical;
+import model.creationLabyrinthe.CreationAleatoire;
 import model.creationLabyrinthe.CreationFichierTexte;
 
 /**
@@ -13,7 +14,7 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
 
-		Labyrinthe game = new Labyrinthe(new CreationFichierTexte("test.txt"));
+		Labyrinthe game = new Labyrinthe(new CreationAleatoire(25,25));
 		LabyrinthePainter painter = new LabyrinthePainter(game);
 		HeroController controller = new HeroController();
 
