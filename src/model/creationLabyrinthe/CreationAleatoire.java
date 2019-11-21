@@ -11,7 +11,7 @@ public class CreationAleatoire implements CreationLabyrinthe {
 
     private Labyrinthe l;
 
-    public CreationAleatoire(int largeur, int hauteur){
+    public CreationAleatoire(int largeur, int hauteur) {
         this.largeur = largeur;
         this.hauteur = hauteur;
     }
@@ -20,12 +20,12 @@ public class CreationAleatoire implements CreationLabyrinthe {
     public void creerLabyrinthe(Labyrinthe l) {
         Case[][] labyrinthe = new Case[largeur][hauteur];
         boolean[][] tab = new boolean[largeur][hauteur];
-        int k = 0, max = largeur*hauteur*3, x = 0, y =hauteur/2, rand;
+        int k = 0, max = largeur * hauteur * 3, x = 0, y = hauteur / 2, rand;
         tab[x][y] = true;
-        while (k<max){
-            rand = (int)(Math.random()*4);
-            switch (rand){
-                case 0 :
+        while (k < max) {
+            rand = (int) (Math.random() * 4);
+            switch (rand) {
+                case 0:
                     x++;
                     break;
                 case 1:
@@ -38,37 +38,37 @@ public class CreationAleatoire implements CreationLabyrinthe {
                     y--;
                     break;
             }
-            x = Math.max(0,x);
-            x = Math.min(largeur-1,x);
-            y = Math.max(0,y);
-            y = Math.min(hauteur-1,y);
+            x = Math.max(0, x);
+            x = Math.min(largeur - 1, x);
+            y = Math.max(0, y);
+            y = Math.min(hauteur - 1, y);
             tab[x][y] = true;
             k++;
         }
 
-        for(int i = 0 ; i < largeur ; i++){
-            for(int j = 0 ; j < hauteur ; j++){
-                if(tab[i][j]){
+        for (int i = 0; i < largeur; i++) {
+            for (int j = 0; j < hauteur; j++) {
+                if (tab[i][j]) {
                     double r = Math.random();
-                    if(r<0.01) {
+                    if (r < 0.01) {
                         labyrinthe[i][j] = new Piege();
-                    }else if(r<0.02) {
+                    } else if (r < 0.02) {
                         labyrinthe[i][j] = new CaseMagique();
-                    }else{
+                    } else {
                         labyrinthe[i][j] = new Sol();
                     }
-                }else {
+                } else {
                     labyrinthe[i][j] = new Mur();
                 }
             }
         }
 
         //labyrinthe[x][y] = new Tresor(l);
-        labyrinthe[x][y] = new Passage(l,largeur,hauteur);
+        labyrinthe[x][y] = new Passage(l, largeur, hauteur);
 
         l.setCases(labyrinthe);
 
-        l.setPositionHero(0, hauteur/2);
+        l.setPositionHero(0, hauteur / 2);
 
     }
 }

@@ -14,40 +14,40 @@ public class DeplacementAlea
 
     public int[] deplacer() {
         int direction;
-        int x=monstre.getX();
-        int y=monstre.getY();
+        int x = monstre.getX();
+        int y = monstre.getY();
         direction = (int) (Math.random() * 4);
-        switch (direction){
+        switch (direction) {
             case 0: //haut
-                if(y - 1 >= 0 && labyrinthe.estTraversable(x, y-1)){
-                    ((Sol)labyrinthe.getCase(x, y)).setTraversable(true);
+                if (y - 1 >= 0 && labyrinthe.estTraversable(x, y - 1)) {
+                    ((Sol) labyrinthe.getCase(x, y)).setTraversable(true);
                     y--;
-                    ((Sol)labyrinthe.getCase(x, y)).setTraversable(false);
+                    ((Sol) labyrinthe.getCase(x, y)).setTraversable(false);
                 }
                 break;
             case 1: //bas
-                if(y + 1 < labyrinthe.getHeight() && labyrinthe.estTraversable(x, y+1)){
-                    ((Sol)labyrinthe.getCase(x, y)).setTraversable(true);
+                if (y + 1 < labyrinthe.getHeight() && labyrinthe.estTraversable(x, y + 1)) {
+                    ((Sol) labyrinthe.getCase(x, y)).setTraversable(true);
                     y++;
-                    ((Sol)labyrinthe.getCase(x, y)).setTraversable(false);
+                    ((Sol) labyrinthe.getCase(x, y)).setTraversable(false);
                 }
                 break;
             case 2:  //gauche
-                if(x - 1 >= 0 && labyrinthe.estTraversable(x-1, y)){
-                    ((Sol)labyrinthe.getCase(x, y)).setTraversable(true);
+                if (x - 1 >= 0 && labyrinthe.estTraversable(x - 1, y)) {
+                    ((Sol) labyrinthe.getCase(x, y)).setTraversable(true);
                     x--;
-                    ((Sol)labyrinthe.getCase(x, y)).setTraversable(false);
+                    ((Sol) labyrinthe.getCase(x, y)).setTraversable(false);
                 }
                 break;
             case 3: //droite
-                if(x + 1 < labyrinthe.getWidth() && labyrinthe.estTraversable(x+1, y)){
-                    ((Sol)labyrinthe.getCase(x, y)).setTraversable(true);
+                if (x + 1 < labyrinthe.getWidth() && labyrinthe.estTraversable(x + 1, y)) {
+                    ((Sol) labyrinthe.getCase(x, y)).setTraversable(true);
                     x++;
-                    ((Sol)labyrinthe.getCase(x, y)).setTraversable(false);
+                    ((Sol) labyrinthe.getCase(x, y)).setTraversable(false);
                 }
                 break;
         }
-        ((Sol)labyrinthe.getCase(x, y)).declancher(monstre);
+        ((Sol) labyrinthe.getCase(x, y)).declancher(monstre);
         return new int[]{x, y};
     }
 }

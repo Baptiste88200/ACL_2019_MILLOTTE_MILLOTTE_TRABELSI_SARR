@@ -3,7 +3,7 @@ package model;
 public class Constantes {
 
     public static final int tailleCase = 32;
-    public static final int INITIAL_SCORE=100;
+    public static final int INITIAL_SCORE = 100;
 
     public static final String IMAGE_HERO_D = "img/heroDROITE.png";
     public static final String IMAGE_HERO_G = "img/heuroGAUCHE.png";
@@ -13,7 +13,8 @@ public class Constantes {
     public static final String IMAGE_TRESOR = "img/tresor.jpeg";
     public static final String IMAGE_MAGIQUE = "img/magique.jpeg";
     public static final String IMAGE_MONSTRE = "img/monstre.jpg";
-    public static enum DIRECTION {
-        HAUT, BAS, GAUCHE, DROITE;
+
+    public enum DIRECTION {
+        HAUT, BAS, GAUCHE, DROITE
     }
 }

@@ -1,7 +1,5 @@
 package engine;
 
-import javax.swing.*;
-
 /**
  * @author Horatiu Cirstea, Vincent Thomas
  *
@@ -71,4 +69,7 @@ public class GameEngineGraphical {
 
 	}
 
+	public GraphicalInterface getGui() {
+		return gui;
+	}
 }

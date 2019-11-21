@@ -2,7 +2,6 @@ package model.factory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class ImageFactory {
 
@@ -14,8 +13,8 @@ public class ImageFactory {
     private static ImageIcon piege = new ImageIcon("./ressources/img/piege.jpeg");
     private static ImageIcon passage = new ImageIcon("./ressources/img/passage.jpeg");
 
-    public static Image getSol(int id){
-        switch (id){
+    public static Image getSol(int id) {
+        switch (id) {
             case 1:
                 return sol1.getImage();
             case 2:
@@ -26,19 +25,19 @@ public class ImageFactory {
         return sol1.getImage();
     }
 
-    public static Image getMur(){
+    public static Image getMur() {
         return mur.getImage();
     }
 
-    public static Image getCaseMagique(){
+    public static Image getCaseMagique() {
         return caseMagique.getImage();
     }
 
-    public static Image getPiege(){
+    public static Image getPiege() {
         return piege.getImage();
     }
 
-    public static Image getPassage(){
+    public static Image getPassage() {
         return passage.getImage();
     }
 

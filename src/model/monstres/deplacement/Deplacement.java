@@ -19,7 +19,7 @@ public abstract class Deplacement {
 
     public abstract int[] deplacer();
 
-    public boolean estACoteDuHero(){
+    public boolean estACoteDuHero() {
         return estACoteDuHero;
     }
 }

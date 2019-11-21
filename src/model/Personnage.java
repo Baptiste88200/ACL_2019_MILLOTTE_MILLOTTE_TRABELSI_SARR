@@ -7,8 +7,11 @@ public interface Personnage {
     void subirDegat(int degat);
 
     void attaquer(Personnage p);
+
     int getX();
+
     int getY();
+
     boolean enVie();
 
 }

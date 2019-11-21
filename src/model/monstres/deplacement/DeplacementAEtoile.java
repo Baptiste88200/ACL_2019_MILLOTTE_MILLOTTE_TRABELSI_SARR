@@ -1,4 +1,3 @@
-
 package model.monstres.deplacement;
 
 
@@ -9,7 +8,7 @@ import model.monstres.Monstre;
 import java.util.LinkedList;
 
 
-public class DeplacementAEtoile  extends Deplacement {
+public class DeplacementAEtoile extends Deplacement {
     private Hero hero;
 
     public DeplacementAEtoile(Labyrinthe labyrinthe, Monstre monstre) {
@@ -30,7 +29,7 @@ public class DeplacementAEtoile  extends Deplacement {
         int i = 0;
         int tmpI = i;
         for (; i < l.size(); i++) {
-            if (node.getHeuristique() > ((Node) l.get(i)).getHeuristique()) {
+            if (node.getHeuristique() > l.get(i).getHeuristique()) {
                 node = l.get(i);
                 tmpI = i;
             }
@@ -46,7 +45,7 @@ public class DeplacementAEtoile  extends Deplacement {
         LinkedList<Node> ferme = new LinkedList<>();
 
         Node A = new Node(this.monstre.getX(), this.monstre.getY(), 0);
-        if (distance(monstre.getX(), monstre.getY()) ==1) {
+        if (distance(monstre.getX(), monstre.getY()) == 1) {
             estACoteDuHero = true;
             return new int[]{monstre.getX(), monstre.getY()};
         }
@@ -115,6 +114,7 @@ public class DeplacementAEtoile  extends Deplacement {
         int initialY;
         double heuristique;
         int cout;
+
         public Node(int x, int y, int cout) {
 
             this.x = x;
@@ -142,6 +142,7 @@ public class DeplacementAEtoile  extends Deplacement {
             this.heuristique = cout + DeplacementAEtoile.this.distance(x, y);
 
         }
+
         public int compareTo(Node node) {
             return (int) (this.heuristique - node.heuristique);
         }

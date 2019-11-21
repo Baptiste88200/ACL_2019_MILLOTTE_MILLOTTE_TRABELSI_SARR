@@ -3,20 +3,18 @@ package model;
 import model.cases.Sol;
 import model.monstres.Monstre;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.IOException;
-import java.net.URL;
 
-import static model.Constantes.*;
-public class Hero implements Personnage{
+import static model.Constantes.DIRECTION;
+import static model.Constantes.INITIAL_SCORE;
 
-    private int x,y;
+public class Hero implements Personnage {
+
+    private int x, y;
     private Labyrinthe labyrinthe;
     private int score;
     private DIRECTION d;
     private int degat;
-
 
 
     public Hero(Labyrinthe l) {
@@ -25,12 +23,12 @@ public class Hero implements Personnage{
         labyrinthe = l;
         degat = 1;
         this.d = DIRECTION.DROITE;
-        score=INITIAL_SCORE;
+        score = INITIAL_SCORE;
     }
 
-    public void afficher(Graphics2D g){
+    public void afficher(Graphics2D g) {
 
-        if(score > 0) {
+        if (score > 0) {
             g.setColor(Color.RED);
             g.fillOval(x * Constantes.tailleCase, y * Constantes.tailleCase, Constantes.tailleCase, Constantes.tailleCase);
         }
@@ -61,6 +59,7 @@ public class Hero implements Personnage{
             e.printStackTrace();
         }*/
     }
+
     public void deplacerGauche() {
         this.x--;
         this.d = DIRECTION.GAUCHE;
@@ -78,18 +77,19 @@ public class Hero implements Personnage{
 
     public void deplacerBas() {
         this.y++;
-        this.d = DIRECTION.BAS; }
+        this.d = DIRECTION.BAS;
+    }
 
     public int getX() {
         return x;
     }
 
-    public int getY() {
-        return y;
-    }
-
     public void setX(int x) {
         this.x = x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public void setY(int y) {
@@ -101,8 +101,9 @@ public class Hero implements Personnage{
         int[] cord = labyrinthe.getCordTraversable();
         x = cord[0];
         y = cord[1];
-        ((Sol) labyrinthe.getCase(x,y)).setTraversable(false);
+        ((Sol) labyrinthe.getCase(x, y)).setTraversable(false);
     }
+
     @Override
     public void attaquer(Personnage monstre) {
         int[][] tab = {{0, 0}, {1, 0}, {-1, 0}, {0, 1}, {0, -1}};
@@ -122,13 +123,13 @@ public class Hero implements Personnage{
     @Override
     public void subirDegat(int d) {
         this.score -= d;
-        if(score <= 0)
+        if (score <= 0)
             labyrinthe.setFinish(true);
     }
 
     @Override
-    public  boolean enVie(){
-        return score>0;
+    public boolean enVie() {
+        return score > 0;
     }
 
     public Monstre getMonstreProche() {

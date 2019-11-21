@@ -5,12 +5,9 @@ import model.Personnage;
 import model.cases.Sol;
 import model.monstres.deplacement.Deplacement;
 import model.monstres.deplacement.DeplacementAEtoile;
-import model.monstres.deplacement.DeplacementAlea;
 
 import java.awt.*;
-import java.sql.SQLOutput;
-import java.util.Arrays;
-import static model.Constantes.*;
+
 public abstract class Monstre implements Personnage {
 
     protected int x, y;
@@ -24,10 +21,10 @@ public abstract class Monstre implements Personnage {
     public Monstre(int x, int y, Labyrinthe labyrinthe) {
         this.x = x;
         this.y = y;
-        this.score=6;
+        this.score = 6;
         this.labyrinthe = labyrinthe;
-        ((Sol) this.labyrinthe.getCase(x,y)).setTraversable(false);
-        deplacement=new DeplacementAEtoile(labyrinthe, this);
+        ((Sol) this.labyrinthe.getCase(x, y)).setTraversable(false);
+        deplacement = new DeplacementAEtoile(labyrinthe, this);
         vitesse = 2;
         cptVitesse = 0;
         degat = 1;
@@ -35,22 +32,22 @@ public abstract class Monstre implements Personnage {
 
     public abstract void afficher(Graphics2D g);
 
-    public void deplacer(){
-        if(cptVitesse == vitesse) {
+    public void deplacer() {
+        if (cptVitesse == vitesse) {
             int[] coord = deplacement.deplacer();
-            if(labyrinthe.estTraversable(coord[0],coord[1])) {
-                labyrinthe.setTraversable(x,y,true);
-                labyrinthe.setTraversable(coord[0],coord[1],false);
+            if (labyrinthe.estTraversable(coord[0], coord[1])) {
+                labyrinthe.setTraversable(x, y, true);
+                labyrinthe.setTraversable(coord[0], coord[1], false);
                 this.x = coord[0];
                 this.y = coord[1];
 
             }
-            if(deplacement.estACoteDuHero()){
+            if (deplacement.estACoteDuHero()) {
                 attaquer(labyrinthe.getHero());
             }
 
             cptVitesse = -1;
-            ((Sol)(labyrinthe.getCase(x,y))).declancher(this);
+            ((Sol) (labyrinthe.getCase(x, y))).declancher(this);
         }
         cptVitesse++;
 
@@ -62,16 +59,17 @@ public abstract class Monstre implements Personnage {
         x = cord[0];
         y = cord[1];
     }
-    public void setDeplacement(Deplacement deplacement){
-        this.deplacement=deplacement;
+
+    public void setDeplacement(Deplacement deplacement) {
+        this.deplacement = deplacement;
     }
 
     @Override
     public void subirDegat(int d) {
         System.out.println(score);
-      score-=d;
-      if(score <= 0)
-          labyrinthe.setTraversable(x,y,true);
+        score -= d;
+        if (score <= 0)
+            labyrinthe.setTraversable(x, y, true);
     }
 
     @Override
@@ -97,7 +95,7 @@ public abstract class Monstre implements Personnage {
 
     @Override
     public boolean enVie() {
-        return score>0;
+        return score > 0;
     }
 
 

@@ -16,7 +16,7 @@ public class Mur implements Case {
     public void afficher(Graphics2D g, int x, int y) {
         /*g.setColor(Color.BLACK);
         g.fillRect(x*Constantes.tailleCase,y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);*/
-        g.drawImage(ImageFactory.getMur(),x*Constantes.tailleCase,y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase,null);
+        g.drawImage(ImageFactory.getMur(), x * Constantes.tailleCase, y * Constantes.tailleCase, Constantes.tailleCase, Constantes.tailleCase, null);
 
     }
 }

@@ -4,8 +4,8 @@ import java.awt.*;
 
 public interface Case {
 
-    public boolean estTraversable();
+    boolean estTraversable();
 
-    public void afficher(Graphics2D g, int x, int y);
+    void afficher(Graphics2D g, int x, int y);
 
 }

@@ -10,7 +10,7 @@ public class CreationFichierTexte implements CreationLabyrinthe {
 
     private String nomFichier;
 
-    public CreationFichierTexte(String nomFichier){
+    public CreationFichierTexte(String nomFichier) {
         super();
         this.nomFichier = nomFichier;
     }
@@ -18,7 +18,7 @@ public class CreationFichierTexte implements CreationLabyrinthe {
 
     @Override
     public void creerLabyrinthe(Labyrinthe l) {
-        try{
+        try {
             BufferedReader br = new BufferedReader(new FileReader("niveaux/" + nomFichier));
             String line = br.readLine();
             int largeur = Integer.valueOf(line);
@@ -28,11 +28,11 @@ public class CreationFichierTexte implements CreationLabyrinthe {
             boolean heroPlace = false;
             int posHeroX = -1;
             int posHeroY = -1;
-            for(int y = 0; y < hauteur; y++){
+            for (int y = 0; y < hauteur; y++) {
                 line = br.readLine();
-                for(int x = 0; x < largeur; x++){
-                   char c = line.charAt(x);
-                    switch (c){
+                for (int x = 0; x < largeur; x++) {
+                    char c = line.charAt(x);
+                    switch (c) {
                         case '.':
                             labyrinthe[x][y] = new Sol();
                             break;
@@ -41,17 +41,17 @@ public class CreationFichierTexte implements CreationLabyrinthe {
                             labyrinthe[x][y] = new CaseMagique();
                             break;
 
-                        case 'P' :
+                        case 'P':
                             labyrinthe[x][y] = new Piege();
                             break;
 
-                        case 'T' :
+                        case 'T':
                             labyrinthe[x][y] = new Tresor(l);
                             break;
 
                         case 'H':
                             labyrinthe[x][y] = new Sol();
-                            if(!heroPlace){
+                            if (!heroPlace) {
                                 heroPlace = true;
                                 posHeroX = x;
                                 posHeroY = y;
@@ -70,17 +70,15 @@ public class CreationFichierTexte implements CreationLabyrinthe {
 
             l.setCases(labyrinthe);
 
-            if(heroPlace){
+            if (heroPlace) {
                 l.setPositionHero(posHeroX, posHeroY);
-            }else{
+            } else {
                 int[] pos = l.getCordTraversable();
                 l.setPositionHero(pos[0], pos[1]);
             }
 
 
-
-
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }

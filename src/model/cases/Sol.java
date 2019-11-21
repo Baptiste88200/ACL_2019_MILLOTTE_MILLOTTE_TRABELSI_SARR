@@ -12,13 +12,13 @@ public class Sol implements Case {
 
     private int idImg; // Pour afficher l'image
 
-    public Sol(){
+    public Sol() {
         traversable = true;
-        if(Math.random()<0.92){
+        if (Math.random() < 0.92) {
             idImg = 1;
-        }else{
-            switch ((int)(Math.random()*2)){
-                case 0 :
+        } else {
+            switch ((int) (Math.random() * 2)) {
+                case 0:
                     idImg = 2;
                     break;
                 case 1:
@@ -44,9 +44,10 @@ public class Sol implements Case {
         g.fillRect(x*Constantes.tailleCase,y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);
         g.setColor(Color.BLACK);
         g.drawRect(x*Constantes.tailleCase,y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase);*/
-        g.drawImage(ImageFactory.getSol(idImg),x*Constantes.tailleCase,y*Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase,null);
+        g.drawImage(ImageFactory.getSol(idImg), x * Constantes.tailleCase, y * Constantes.tailleCase, Constantes.tailleCase, Constantes.tailleCase, null);
     }
 
-    public void declancher(Personnage p){}
+    public void declancher(Personnage p) {
+    }
 
 }

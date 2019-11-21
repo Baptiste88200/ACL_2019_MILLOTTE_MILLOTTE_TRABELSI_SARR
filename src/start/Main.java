@@ -1,11 +1,12 @@
 package start;
 
+import engine.GameEngineGraphical;
 import model.HeroController;
 import model.Labyrinthe;
 import model.LabyrinthePainter;
-import engine.GameEngineGraphical;
 import model.creationLabyrinthe.CreationAleatoire;
-import model.creationLabyrinthe.CreationFichierTexte;
+
+import javax.swing.*;
 
 /**
  * lancement du moteur avec le jeu
@@ -13,14 +14,22 @@ import model.creationLabyrinthe.CreationFichierTexte;
 public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
+		Labyrinthe game;
+		LabyrinthePainter painter;
+		HeroController controller;
+		GameEngineGraphical engine;
+		do {
+			game = new Labyrinthe(new CreationAleatoire(25, 25));
+			painter = new LabyrinthePainter(game);
+			controller = new HeroController();
 
-		Labyrinthe game = new Labyrinthe(new CreationAleatoire(25,25));
-		LabyrinthePainter painter = new LabyrinthePainter(game);
-		HeroController controller = new HeroController();
-
-		// classe qui lance le moteur de jeu generique
-		GameEngineGraphical engine = new GameEngineGraphical(game, painter, controller);
-		engine.run();
+			// classe qui lance le moteur de jeu generique
+			engine = new GameEngineGraphical(game, painter, controller);
+			engine.run();
+		} while (JOptionPane.showConfirmDialog(engine.getGui().getFrame(), (game.getHero().enVie() ? "Vous avez gagnez" : "Vous avez perdu") + "!!!\n\nVoulez vous continuez")
+				== JOptionPane.YES_OPTION
+		);
+		engine.getGui().getFrame().dispose();
 	}
 
 }
