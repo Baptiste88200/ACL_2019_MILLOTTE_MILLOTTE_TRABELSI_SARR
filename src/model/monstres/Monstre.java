@@ -22,6 +22,7 @@ public abstract class Monstre implements Personnage {
     private int cptVitesse;
     protected Sprite sprite;
 
+
     public Monstre(int x, int y, Labyrinthe labyrinthe,int pv, int vit) {
         this.x = x;
         this.y = y;

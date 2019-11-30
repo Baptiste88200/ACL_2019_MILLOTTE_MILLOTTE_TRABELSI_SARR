@@ -19,8 +19,4 @@ public TexturePaint monstre;
     public MonstreVert(int x, int y, Labyrinthe labyrinthe) {
         super(x, y, labyrinthe,4,8);
     }
-
-
-
-
 }

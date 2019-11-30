@@ -51,6 +51,7 @@ public class Labyrinthe implements Game {
     public void evolve(Cmd commande) {
         switch (commande) {
             case LEFT:
+                hero.setAttaque(false);
                 if (hero.getX() != 0 && getCase(hero.getX() - 1, hero.getY()).estTraversable()) {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
                     hero.deplacerGauche();
@@ -58,6 +59,7 @@ public class Labyrinthe implements Game {
                 }
                 break;
             case RIGHT:
+                hero.setAttaque(false);
                 if (hero.getX() != getWidth() - 1 && getCase(hero.getX() + 1, hero.getY()).estTraversable()) {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
                     hero.deplacerDroite();
@@ -65,6 +67,7 @@ public class Labyrinthe implements Game {
                 }
                 break;
             case UP:
+                hero.setAttaque(false);
                 if (hero.getY() != 0 && getCase(hero.getX(), hero.getY() - 1).estTraversable()) {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
                     hero.deplacerHaut();
@@ -72,6 +75,7 @@ public class Labyrinthe implements Game {
                 }
                 break;
             case DOWN:
+                hero.setAttaque(false);
                 if (hero.getY() != getHeight() - 1 && getCase(hero.getX(), hero.getY() + 1).estTraversable()) {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
                     hero.deplacerBas();
@@ -80,9 +84,11 @@ public class Labyrinthe implements Game {
                 break;
             case ENTREE:
                 Monstre monstre = hero.getMonstreProche();
+                hero.setAttaque(true);
                 if (monstre != null)
                     this.hero.attaquer(monstre);
                 break;
+
         }
 
         Iterator<Monstre> iterator = monstres.iterator();

@@ -16,7 +16,11 @@ public class ImageFactory {
     private static ImageIcon passage = new ImageIcon("./ressources/img/passage.jpeg");
 
 
-    private static ImageIcon hero = new ImageIcon("./ressources/img/hero.png");
+    private static ImageIcon attaqueHaut = new ImageIcon("./ressources/img/hero/attaque-h.png");
+    private static ImageIcon attaqueBas = new ImageIcon("./ressources/img/hero/attaque-b.png");
+    private static ImageIcon attaqueGauche = new ImageIcon("./ressources/img/hero/attaque-g.png");
+    private static ImageIcon attaqueDroit = new ImageIcon("./ressources/img/hero/attaque-d.png");
+
 
 
     public static Image getSol(int id) {
@@ -47,8 +51,20 @@ public class ImageFactory {
         return passage.getImage();
     }
 
-    public static Image getHero() {
-        return passage.getImage();
+    public static Image getAttaqueHaut() {
+        return attaqueHaut.getImage();
+    }
+
+    public static Image getAttaqueBas() {
+        return attaqueBas.getImage();
+    }
+
+    public static Image getAttaqueGauche() {
+        return attaqueGauche.getImage();
+    }
+
+    public static Image getAttaqueDroit() {
+        return attaqueDroit.getImage();
     }
 
     public static Sprite getSpriteHero(){
