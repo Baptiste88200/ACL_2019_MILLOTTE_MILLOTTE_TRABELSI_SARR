@@ -9,6 +9,7 @@ import model.creationLabyrinthe.CreationAleatoire;
 import model.creationLabyrinthe.CreationFichierTexte;
 import model.creationLabyrinthe.CreationLabyrinthe;
 import model.factory.ImageFactory;
+import model.factory.MonstreFactory;
 
 import java.awt.*;
 
@@ -37,8 +38,8 @@ public class Passage extends Sol {
             labyrinthe.supprimerLesMonstres();
             labyrinthe.reinitialiserPositionHero();
             creationLabyrinthe.creerLabyrinthe(labyrinthe);
-            labyrinthe.creerMonstreVert();
-            labyrinthe.creerMonstreVert();
+            MonstreFactory.creerMonstreVert(labyrinthe);
+            MonstreFactory.creerFantome(labyrinthe);
         }
     }
 

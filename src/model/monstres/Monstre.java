@@ -17,23 +17,22 @@ public abstract class Monstre implements Personnage {
     protected Labyrinthe labyrinthe;
     protected Deplacement deplacement;
     protected int score;
-    private int degat;
-    private int vitesse;
-    private int cptVitesse;
+    protected int degat;
+    protected int vitesse;
+    protected int cptVitesse;
     protected Sprite sprite;
 
 
-    public Monstre(int x, int y, Labyrinthe labyrinthe,int pv, int vit) {
+    public Monstre(int x, int y, Labyrinthe labyrinthe, Sprite sprite, int pv, int vit, int degat) {
         this.x = x;
         this.y = y;
         this.score = pv;
         this.labyrinthe = labyrinthe;
         ((Sol) this.labyrinthe.getCase(x, y)).setTraversable(false);
-        deplacement = new DeplacementAEtoile(labyrinthe, this);
         vitesse = vit;
         cptVitesse = 0;
-        degat = 1;
-        sprite = ImageFactory.getSpriteMonstre1();
+        this.degat = degat;
+        this.sprite = sprite;
     }
 
     public void deplacer() {

@@ -91,7 +91,17 @@ public class ImageFactory {
                 new ImageIcon("./ressources/img/monstre1/monstre1-d2.png").getImage());
     }
 
-
+    public static Sprite getSpriteFantome(){
+        return new Sprite(
+                new ImageIcon("./ressources/img/fantome/fantome-b1.png").getImage(),
+                new ImageIcon("./ressources/img/fantome/fantome-b2.png").getImage(),
+                new ImageIcon("./ressources/img/fantome/fantome-h1.png").getImage(),
+                new ImageIcon("./ressources/img/fantome/fantome-h2.png").getImage(),
+                new ImageIcon("./ressources/img/fantome/fantome-g1.png").getImage(),
+                new ImageIcon("./ressources/img/fantome/fantome-g2.png").getImage(),
+                new ImageIcon("./ressources/img/fantome/fantome-d1.png").getImage(),
+                new ImageIcon("./ressources/img/fantome/fantome-d2.png").getImage());
+    }
 
 
 }

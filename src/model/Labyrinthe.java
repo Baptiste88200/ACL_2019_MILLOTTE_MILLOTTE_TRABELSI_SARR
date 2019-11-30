@@ -5,6 +5,8 @@ import engine.Game;
 import model.cases.Case;
 import model.cases.Sol;
 import model.creationLabyrinthe.CreationLabyrinthe;
+import model.factory.MonstreFactory;
+import model.monstres.Fantome;
 import model.monstres.Monstre;
 import model.monstres.MonstreVert;
 
@@ -36,9 +38,9 @@ public class Labyrinthe implements Game {
         finish = false;
         etageCourant = 1;
         monstres = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
-            creerMonstreVert();
-        }
+        MonstreFactory.creerMonstreVert(this);
+        MonstreFactory.creerFantome(this);
+
 
     }
 
@@ -185,7 +187,8 @@ public class Labyrinthe implements Game {
 
     public void creerMonstreVert() {
         int[] pos = getCordTraversable();
-        ajouterMonstre(new MonstreVert(pos[0], pos[1], this));
+       // ajouterMonstre(new MonstreVert(pos[0], pos[1], this));
+        ajouterMonstre(new Fantome(pos[0], pos[1], this));
     }
 
     public void setFinish(boolean finish) {
