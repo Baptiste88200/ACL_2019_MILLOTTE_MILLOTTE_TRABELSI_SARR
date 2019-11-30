@@ -26,12 +26,15 @@ public class Labyrinthe implements Game {
 
     private Collection<Monstre> monstres;
 
+    private int etageCourant;
+
     private boolean finish;
 
     public Labyrinthe(CreationLabyrinthe cl) {
         hero = new Hero(this);
         cl.creerLabyrinthe(this);
         finish = false;
+        etageCourant = 1;
         monstres = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
             creerMonstreVert();
@@ -190,6 +193,14 @@ public class Labyrinthe implements Game {
     public void reinitialiserPositionHero() {
         hero.setX(-1);
         hero.setY(-1);
+    }
+
+    public void changerEtage(){
+        etageCourant++;
+    }
+
+    public int getEtageCourant(){
+        return etageCourant;
     }
 
 }

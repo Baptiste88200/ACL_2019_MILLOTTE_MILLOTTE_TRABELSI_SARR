@@ -1,10 +1,13 @@
 package model.cases;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import model.Constantes;
 import model.Hero;
 import model.Labyrinthe;
 import model.Personnage;
 import model.creationLabyrinthe.CreationAleatoire;
+import model.creationLabyrinthe.CreationFichierTexte;
+import model.creationLabyrinthe.CreationLabyrinthe;
 import model.factory.ImageFactory;
 
 import java.awt.*;
@@ -24,10 +27,16 @@ public class Passage extends Sol {
     @Override
     public void declancher(Personnage p) {
         if (p instanceof Hero) {
-            CreationAleatoire creationAleatoire = new CreationAleatoire(largeur, hauteur);
+            CreationLabyrinthe creationLabyrinthe;
+            labyrinthe.changerEtage();
+            if(labyrinthe.getEtageCourant() == Constantes.NB_ETAGE){ //Si c'est le dernier niveau
+                creationLabyrinthe = new CreationFichierTexte("dernier-niveau.txt");
+            }else{
+                creationLabyrinthe = new CreationAleatoire(largeur, hauteur);
+            }
             labyrinthe.supprimerLesMonstres();
             labyrinthe.reinitialiserPositionHero();
-            creationAleatoire.creerLabyrinthe(labyrinthe);
+            creationLabyrinthe.creerLabyrinthe(labyrinthe);
             labyrinthe.creerMonstreVert();
             labyrinthe.creerMonstreVert();
         }
