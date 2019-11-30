@@ -1,6 +1,7 @@
 package model;
 
 import model.cases.Sol;
+import model.factory.ImageFactory;
 import model.monstres.Monstre;
 
 import java.awt.*;
@@ -22,8 +23,9 @@ public class Hero implements Personnage {
     private int x, y;
     private Labyrinthe labyrinthe;
     private int score;
-    private DIRECTION d;
+    private int direction;
     private int degat;
+    private Sprite sprite;
 
 
     public Hero(Labyrinthe l) {
@@ -31,73 +33,36 @@ public class Hero implements Personnage {
         this.y = -1;
         labyrinthe = l;
         degat = 1;
-        this.d = DIRECTION.DROITE;
         score = INITIAL_SCORE;
+        sprite = ImageFactory.getSpriteHero();
     }
 
     public void afficher(Graphics2D g) {
 
         if (score > 0) {
-             BufferedImage buffer = null;
-             Path path = FileSystems.getDefault().getPath(".").toAbsolutePath();
-             try {
-                buffer = ImageIO.read(new File(path.toString()+"/src/model/images/hero.png"));            
-              } catch (IOException ex) {
-            Logger.getLogger(MonstreVert.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      
-        // g.setColor(Color.GREEN);
-        //g.fillOval(x * Constantes.tailleCase, y * Constantes.tailleCase, Constantes.tailleCase, Constantes.tailleCase);
-         g.drawImage(buffer, x * Constantes.tailleCase, y * Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase,null);
-           // g.setColor(Color.RED);
-           // g.fillOval(x * Constantes.tailleCase, y * Constantes.tailleCase, Constantes.tailleCase, Constantes.tailleCase);
-        }
-        /*g.setColor(Color.RED);
-        g.setFont(new Font("TimesRoman", 3, 13));
-        g.drawString("Score:" + this.score + " Tresor:" + Character.MIN_VALUE + " magique :" + Character.MIN_VALUE, 10, 15);
-        URL url = getClass().getResource("/img/heroDROITE.png");
-        switch (this.d) {
-            case GAUCHE:
-                url = getClass().getResource("/img/heuroGAUCHE.png");
-                break;
-            case DROITE:
-                url = getClass().getResource("/img/heroDROITE.png");
-                break;
-            case HAUT:
-                url = getClass().getResource("/img/heroHAUT.png");
-                break;
-            case BAS:
-                url = getClass().getResource("/img/heroBAS.png");
-                break;
-        }
+            g.drawImage(sprite.getImage(), x * Constantes.tailleCase, y * Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase,null);
 
-        int i = this.x * 40;
-        int j = this.y * 40;
-        try {
-            g.drawImage(ImageIO.read(url), i, j, 40, 40, null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+        }
     }
 
     public void deplacerGauche() {
         this.x--;
-        this.d = DIRECTION.GAUCHE;
+        sprite.setDirection(Constantes.GAUCHE);
     }
 
     public void deplacerDroite() {
         this.x++;
-        this.d = DIRECTION.DROITE;
+        sprite.setDirection(Constantes.DROITE);
     }
 
     public void deplacerHaut() {
         this.y--;
-        this.d = DIRECTION.HAUT;
+        sprite.setDirection(Constantes.HAUT);
     }
 
     public void deplacerBas() {
         this.y++;
-        this.d = DIRECTION.BAS;
+        sprite.setDirection(Constantes.BAS);
     }
 
     public int getX() {

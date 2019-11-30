@@ -5,14 +5,7 @@ public class Constantes {
     public static final int tailleCase = 32;
     public static final int INITIAL_SCORE = 100;
 
-    public static final String IMAGE_HERO_D = "img/heroDROITE.png";
-    public static final String IMAGE_HERO_G = "img/heuroGAUCHE.png";
-    public static final String IMAGE_HERO_H = "img/heroHAUT.png";
-    public static final String IMAGE_HERO_B = "img/heroBAS.png";
-    public static final String IMAGE_MUR = "img/mur.jpeg";
-    public static final String IMAGE_TRESOR = "img/tresor.jpeg";
-    public static final String IMAGE_MAGIQUE = "img/magique.jpeg";
-    public static final String IMAGE_MONSTRE = "img/monstre.jpg";
+    public final static int BAS = 0, HAUT = 1, GAUCHE = 2, DROITE = 3;
 
     public enum DIRECTION {
         HAUT, BAS, GAUCHE, DROITE

@@ -1,8 +1,11 @@
 package model.monstres;
 
+import model.Constantes;
 import model.Labyrinthe;
 import model.Personnage;
+import model.Sprite;
 import model.cases.Sol;
+import model.factory.ImageFactory;
 import model.monstres.deplacement.Deplacement;
 import model.monstres.deplacement.DeplacementAEtoile;
 
@@ -17,20 +20,20 @@ public abstract class Monstre implements Personnage {
     private int degat;
     private int vitesse;
     private int cptVitesse;
+    protected Sprite sprite;
 
-    public Monstre(int x, int y, Labyrinthe labyrinthe) {
+    public Monstre(int x, int y, Labyrinthe labyrinthe,int pv, int vit) {
         this.x = x;
         this.y = y;
-        this.score = 6;
+        this.score = pv;
         this.labyrinthe = labyrinthe;
         ((Sol) this.labyrinthe.getCase(x, y)).setTraversable(false);
         deplacement = new DeplacementAEtoile(labyrinthe, this);
-        vitesse = 2;
+        vitesse = vit;
         cptVitesse = 0;
         degat = 1;
+        sprite = ImageFactory.getSpriteMonstre1();
     }
-
-    public abstract void afficher(Graphics2D g);
 
     public void deplacer() {
         if (cptVitesse == vitesse) {
@@ -38,12 +41,36 @@ public abstract class Monstre implements Personnage {
             if (labyrinthe.estTraversable(coord[0], coord[1])) {
                 labyrinthe.setTraversable(x, y, true);
                 labyrinthe.setTraversable(coord[0], coord[1], false);
+
+                if(coord[0] != this.x){
+                    if(coord[0]>this.x){
+                        sprite.setDirection(Constantes.DROITE);
+                    }else {
+                        sprite.setDirection(Constantes.GAUCHE);
+                    }
+                }else if(coord[1] != this.y){
+                    if(coord[1]>this.y){
+                        sprite.setDirection(Constantes.BAS);
+                    }else {
+                        sprite.setDirection(Constantes.HAUT);
+                    }
+                }
+
                 this.x = coord[0];
                 this.y = coord[1];
 
             }
             if (deplacement.estACoteDuHero()) {
                 attaquer(labyrinthe.getHero());
+                if(labyrinthe.getHero().getX()+1==this.x){
+                    sprite.setDirection(Constantes.GAUCHE);
+                }else if(labyrinthe.getHero().getX()-1==this.x){
+                    sprite.setDirection(Constantes.DROITE);
+                }else if(labyrinthe.getHero().getY()+1==this.y){
+                    sprite.setDirection(Constantes.HAUT);
+                }else if(labyrinthe.getHero().getY()-1==this.y){
+                    sprite.setDirection(Constantes.BAS);
+                }
             }
 
             cptVitesse = -1;
@@ -101,6 +128,9 @@ public abstract class Monstre implements Personnage {
     {
         return this.score;
     }
-            
+
+    public void afficher(Graphics2D g) {
+        g.drawImage(sprite.getImage(), x * Constantes.tailleCase, y * Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase,null);
+    }
 
 }

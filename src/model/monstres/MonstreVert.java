@@ -17,23 +17,10 @@ import javax.imageio.ImageIO;
 public class MonstreVert extends Monstre {
 public TexturePaint monstre;
     public MonstreVert(int x, int y, Labyrinthe labyrinthe) {
-        super(x, y, labyrinthe);
+        super(x, y, labyrinthe,4,8);
     }
 
-    public void afficher(Graphics2D g) {
-         BufferedImage buffer = null;
-         Path path = FileSystems.getDefault().getPath(".").toAbsolutePath();
-        try {
-            buffer = ImageIO.read(new File(path.toString()+"/src/model/images/monstrevert.png"));            
-        } catch (IOException ex) {
-            Logger.getLogger(MonstreVert.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      
-        // g.setColor(Color.GREEN);
-        //g.fillOval(x * Constantes.tailleCase, y * Constantes.tailleCase, Constantes.tailleCase, Constantes.tailleCase);
-         g.drawImage(buffer, x * Constantes.tailleCase, y * Constantes.tailleCase,Constantes.tailleCase,Constantes.tailleCase,null);
-                
-    }
+
 
 
 }
