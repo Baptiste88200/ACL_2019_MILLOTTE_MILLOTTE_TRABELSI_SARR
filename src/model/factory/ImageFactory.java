@@ -14,6 +14,7 @@ public class ImageFactory {
     private static ImageIcon caseMagique = new ImageIcon("./ressources/img/caseMagique.jpeg");
     private static ImageIcon piege = new ImageIcon("./ressources/img/piege.jpeg");
     private static ImageIcon passage = new ImageIcon("./ressources/img/passage.jpeg");
+    private static ImageIcon caseSoin = new ImageIcon("./ressources/img/caseSoin.jpeg");
 
 
     private static ImageIcon attaqueHaut = new ImageIcon("./ressources/img/hero/attaque-h.png");
@@ -49,6 +50,10 @@ public class ImageFactory {
 
     public static Image getPassage() {
         return passage.getImage();
+    }
+
+    public static Image getCaseSoin() {
+        return caseSoin.getImage();
     }
 
     public static Image getAttaqueHaut() {
@@ -103,5 +108,16 @@ public class ImageFactory {
                 new ImageIcon("./ressources/img/fantome/fantome-d2.png").getImage());
     }
 
+    public static Sprite getSpriteLoup(){
+        return new Sprite(
+                new ImageIcon("./ressources/img/loup/loup-b1.png").getImage(),
+                new ImageIcon("./ressources/img/loup/loup-b2.png").getImage(),
+                new ImageIcon("./ressources/img/loup/loup-h1.png").getImage(),
+                new ImageIcon("./ressources/img/loup/loup-h2.png").getImage(),
+                new ImageIcon("./ressources/img/loup/loup-g1.png").getImage(),
+                new ImageIcon("./ressources/img/loup/loup-g2.png").getImage(),
+                new ImageIcon("./ressources/img/loup/loup-d1.png").getImage(),
+                new ImageIcon("./ressources/img/loup/loup-d2.png").getImage());
+    }
 
 }

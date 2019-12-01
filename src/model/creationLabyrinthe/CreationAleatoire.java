@@ -54,7 +54,9 @@ public class CreationAleatoire implements CreationLabyrinthe {
                         labyrinthe[i][j] = new Piege();
                     } else if (r < 0.02) {
                         labyrinthe[i][j] = new CaseMagique();
-                    } else {
+                    } else if (r < 0.022) {
+                        labyrinthe[i][j] = new CaseSoin();
+                    }else{
                         labyrinthe[i][j] = new Sol();
                     }
                 } else {

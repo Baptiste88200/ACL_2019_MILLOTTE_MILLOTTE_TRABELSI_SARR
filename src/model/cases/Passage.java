@@ -40,6 +40,7 @@ public class Passage extends Sol {
             creationLabyrinthe.creerLabyrinthe(labyrinthe);
             MonstreFactory.creerMonstreVert(labyrinthe);
             MonstreFactory.creerFantome(labyrinthe);
+            MonstreFactory.creerLoup(labyrinthe);
         }
     }
 
