@@ -133,7 +133,7 @@ public class MonstreTest {
     public class MonstreImpl extends Monstre {
 
         public MonstreImpl() {
-            super(0, 0, null);
+            super(0, 0, null,null,0,0,0);
         }
 
         public void afficher(Graphics2D g) {
