@@ -8,7 +8,7 @@ import model.monstres.deplacement.DeplacementFantome;
 public class Fantome extends Monstre{
 
     public Fantome(int x, int y, Labyrinthe labyrinthe) {
-        super(x, y, labyrinthe, ImageFactory.getSpriteFantome(), 10, 1, 2);
+        super(x, y, labyrinthe, ImageFactory.getInstance().getSpriteFantome(), 10, 2, 2);
         setDeplacement(new DeplacementFantome(labyrinthe, this));
     }
 
