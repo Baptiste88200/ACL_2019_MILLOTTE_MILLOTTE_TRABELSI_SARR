@@ -7,14 +7,14 @@ new FormModel {
 			"JavaCodeGenerator.defaultVariableGetter": true
 		}
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space ::195:x, par l:::p {comp nouveau::::217:x, comp play::l::217:x, comp load::t:::x, comp exit::l:::x}, space ::178:x}}"
-			"$verticalGroup": "par l {seq {space :p:44:p, comp nouveau:::p:57:p, space :p:32:p, comp play:::p:57:p, space :p:26:p, comp load:::p:53:p, space :p:43:p, comp exit:::p:53:p, space ::100:x}}"
+			"$horizontalGroup": "par l {seq {space ::195:x, par l:::p {comp nouveau::::217:x, comp save::l::217:x, comp load::t:::x, comp exit::l:::x}, space ::178:x}}"
+			"$verticalGroup": "par l {seq {space :p:44:p, comp nouveau:::p:57:p, space :p:32:p, comp save:::p:57:p, space :p:26:p, comp load:::p:53:p, space :p:43:p, comp exit:::p:53:p, space ::100:x}}"
 		} ) {
 			name: "this"
 			"background": &SwingColor0 new com.jformdesigner.model.SwingColor( "nimbusBlueGrey" )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "load"
-				"text": "Chargement"
+				"text": "Load"
 				"font": &Font0 new java.awt.Font( "DialogInput", 0, 16 )
 				"foreground": &SwingColor1 new com.jformdesigner.model.SwingColor( "nimbusSelectedText" )
 				"background": #SwingColor0
@@ -30,15 +30,15 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "nouveau"
-				"text": "Nouveau"
+				"text": "New"
 				"font": #Font0
 				"foreground": #SwingColor1
 				"background": #SwingColor0
 				"border": #SoftBevelBorder0
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "play"
-				"text": "Play"
+				name: "save"
+				"text": "Save"
 				"font": #Font0
 				"foreground": #SwingColor1
 				"background": #SwingColor0

@@ -28,7 +28,7 @@ public class Menu extends JPanel {
     private JButton load;
     private JButton exit;
     private JButton nouveau;
-    private JButton play;
+    private JButton save;
 
     public Menu(GamePainter painter, MenuController controller) {
         this.controller = controller;
@@ -49,10 +49,10 @@ public class Menu extends JPanel {
                     controller.setCommand(Cmd.ECHAP);
             }
         });
-        play.addActionListener(new ActionListener() {
+        save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                controller.setCommand(Cmd.PLAY);
+                controller.setCommand(Cmd.SAVE);
             }
         });
         load.addActionListener(new ActionListener() {
@@ -67,6 +67,13 @@ public class Menu extends JPanel {
                 controller.setCommand(Cmd.NEW);
             }
         });
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.setCommand(Cmd.EXIT);
+            }
+        });
+
     }
 
     public JButton getNouveau() {
@@ -77,8 +84,8 @@ public class Menu extends JPanel {
         return load;
     }
 
-    public JButton getPlay() {
-        return play;
+    public JButton getSave() {
+        return save;
     }
 
     public JButton getExit() {
@@ -95,7 +102,7 @@ public class Menu extends JPanel {
         load = new JButton();
         exit = new JButton();
         nouveau = new JButton();
-        play = new JButton();
+        save = new JButton();
 
         //======== this ========
         setBackground(UIManager.getColor("nimbusBlueGrey"));
@@ -135,11 +142,11 @@ public class Menu extends JPanel {
         nouveau.setBorder(new SoftBevelBorder(SoftBevelBorder.LOWERED));
 
         //---- play ----
-        play.setText("Play");
-        play.setFont(new Font(Font.DIALOG_INPUT, Font.PLAIN, 16));
-        play.setForeground(UIManager.getColor("nimbusSelectedText"));
-        play.setBackground(UIManager.getColor("nimbusBlueGrey"));
-        play.setBorder(new SoftBevelBorder(SoftBevelBorder.LOWERED));
+        save.setText("Save");
+        save.setFont(new Font(Font.DIALOG_INPUT, Font.PLAIN, 16));
+        save.setForeground(UIManager.getColor("nimbusSelectedText"));
+        save.setBackground(UIManager.getColor("nimbusBlueGrey"));
+        save.setBorder(new SoftBevelBorder(SoftBevelBorder.LOWERED));
 
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
@@ -149,7 +156,7 @@ public class Menu extends JPanel {
                                 .addContainerGap(195, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                         .addComponent(nouveau, GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
-                                        .addComponent(play, GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                                        .addComponent(save, GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
                                         .addComponent(load, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(exit, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap(178, Short.MAX_VALUE))
@@ -160,7 +167,7 @@ public class Menu extends JPanel {
                                 .addGap(44, 44, 44)
                                 .addComponent(nouveau, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
                                 .addGap(32, 32, 32)
-                                .addComponent(play, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(save, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
                                 .addComponent(load, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
                                 .addGap(43, 43, 43)

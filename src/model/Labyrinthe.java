@@ -71,7 +71,6 @@ public class Labyrinthe implements Game {
      */
     @Override
     public void evolve(Cmd commande) {
-        System.out.println(commande);
         switch (commande) {
             case LEFT:
                 hero.setAttaque(false);
@@ -82,18 +81,18 @@ public class Labyrinthe implements Game {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
                 }
                 else
-                    SonSingleton.getInstance().mur.play();               
+                   SonSingleton.getInstance().mur.play();
                 break;
             case RIGHT:
                 hero.setAttaque(false);
                 if (hero.getX() != getWidth() - 1 && getCase(hero.getX() + 1, hero.getY()).estTraversable()) {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
                     hero.deplacerDroite();
-                     SonSingleton.getInstance().hero.play();
+                    SonSingleton.getInstance().hero.play();
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
                 }
                  else
-                    SonSingleton.getInstance().mur.play();            
+                    SonSingleton.getInstance().mur.play();
                 break;
             case UP:
                 hero.setAttaque(false);
@@ -104,7 +103,7 @@ public class Labyrinthe implements Game {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
                 }
                 else
-                    SonSingleton.getInstance().mur.play();            
+                    SonSingleton.getInstance().mur.play();
                 break;
             case DOWN:
                 hero.setAttaque(false);
@@ -115,7 +114,7 @@ public class Labyrinthe implements Game {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
                 }
                 else
-                    SonSingleton.getInstance().mur.play();            
+                    SonSingleton.getInstance().mur.play();
                 break;
             case ENTREE:
                 Monstre monstre = hero.getMonstreProche();

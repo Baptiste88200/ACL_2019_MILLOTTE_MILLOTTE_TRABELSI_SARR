@@ -63,6 +63,7 @@ public class HeroController implements GameController {
                 break;
             case (KeyEvent.VK_ESCAPE):
                 commandeEnCours = Cmd.ECHAP;
+                break;
 
 
         }

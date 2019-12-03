@@ -3,21 +3,11 @@ package model;
 import model.cases.Sol;
 import model.factory.ImageFactory;
 import model.monstres.Monstre;
+import model.son.SonSingleton;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 
-import static model.Constantes.DIRECTION;
 import static model.Constantes.INITIAL_SCORE;
-import model.monstres.MonstreVert;
-import model.son.SonSingleton;
 
 public class Hero implements Personnage {
 

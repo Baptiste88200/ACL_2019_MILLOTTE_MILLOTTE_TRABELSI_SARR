@@ -21,17 +21,18 @@ public class SonSingleton {
     private boolean state;
     private URL sonUrl;
     private SonSingleton() {
-        this.state= false;
-        path = FileSystems.getDefault().getPath(".").toAbsolutePath();
-        allPath =path.toString()+"/src/model/son/sons/";
+        this.state = false;
+        path = FileSystems.getDefault().getPath("").toAbsolutePath();
+        allPath = "/sons/";
+        System.out.println(allPath);
 
-        sonUrl = SonSingleton.class.getResource(allPath+"pas.wav");
+        sonUrl = SonSingleton.class.getResource(allPath + "pas.wav");
         hero = Applet.newAudioClip(sonUrl);
 
-        sonUrl = SonSingleton.class.getResource(allPath+"attack.wav");
+        sonUrl = SonSingleton.class.getResource(allPath + "attack.wav");
         attack = Applet.newAudioClip(sonUrl);
 
-        sonUrl = SonSingleton.class.getResource(allPath+"deplacer.mp3");
+        sonUrl = SonSingleton.class.getResource(allPath + "deplacer.mp3");
         deplacement = Applet.newAudioClip(sonUrl);
 
         // sonUrl = SonSingleton.class.getResource(allPath+"piege.wav");
@@ -54,16 +55,17 @@ public class SonSingleton {
 
     }
 
-    public boolean getState()
-    {
+    public boolean getState() {
         return this.state;
     }
 
-    public void setState(boolean state)
-    {
-        this.state =state;
+    public void setState(boolean state) {
+        this.state = state;
     }
-    public static SonSingleton getInstance() {
+
+    synchronized public static SonSingleton getInstance() {
+        if (ourInstance == null)
+            ourInstance = new SonSingleton();
         return ourInstance;
     }
 }
