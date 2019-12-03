@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 import static model.Constantes.DIRECTION;
 import static model.Constantes.INITIAL_SCORE;
 import model.monstres.MonstreVert;
+import model.son.SonSingelton;
 
 public class Hero implements Personnage {
 
@@ -169,6 +170,7 @@ public class Hero implements Personnage {
         x = cord[0];
         y = cord[1];
         ((Sol) labyrinthe.getCase(x, y)).setTraversable(false);
+        SonSingelton.getInstance().deplacement.play();
     }
 
     @Override
@@ -179,6 +181,7 @@ public class Hero implements Personnage {
         for (int[] c : tab) {
             if (getX() + c[0] == monstre.getX() && getY() + c[1] == getY()) {
                 monstre.subirDegat(degat);
+                SonSingelton.getInstance().attack.play();
                 break;
             }
         }

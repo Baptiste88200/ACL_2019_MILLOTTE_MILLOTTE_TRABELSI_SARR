@@ -1,5 +1,6 @@
 package model.son;
 
+import java.applet.Applet;
 import java.applet.AudioClip;
 import java.net.URL;
 import java.nio.file.FileSystems;
@@ -9,9 +10,9 @@ public class SonSingelton {
     private static SonSingelton ourInstance = null;
     private Path path;
     private String  allPath;
-    private AudioClip hero;
-    private AudioClip attack;
-    private AudioClip deplacement;
+    public AudioClip hero;
+    public AudioClip attack;
+    public AudioClip deplacement;
     private AudioClip piege;
     private AudioClip mur;
     private AudioClip tresor;
@@ -24,14 +25,14 @@ public class SonSingelton {
         path = FileSystems.getDefault().getPath(".").toAbsolutePath();
         allPath =path.toString()+"/src/model/son/sons/";
 
-      //  sonUrl = SonsJeu.class.getResource(allPath+"hero.wav");
-       // hero = Applet.newAudioClip(sonUrl);
+        sonUrl = SonSingelton.class.getResource(allPath+"pas.wav");
+        hero = Applet.newAudioClip(sonUrl);
 
-        //  sonUrl = SonsJeu.class.getResource(allPath+"attack.wav");
-        // attack = Applet.newAudioClip(sonUrl);
+        sonUrl = SonSingelton.class.getResource(allPath+"attack.wav");
+        attack = Applet.newAudioClip(sonUrl);
 
-        //  sonUrl = SonsJeu.class.getResource(allPath+"deplacement.wav");
-        // deplacement = Applet.newAudioClip(sonUrl);
+         sonUrl = SonSingelton.class.getResource(allPath+"deplacer.wav");
+         deplacement = Applet.newAudioClip(sonUrl);
 
         //  sonUrl = SonsJeu.class.getResource(allPath+"piege.wav");
         // piege = Applet.newAudioClip(sonUrl);

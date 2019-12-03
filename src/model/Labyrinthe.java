@@ -13,6 +13,7 @@ import model.monstres.MonstreVert;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import model.son.SonSingelton;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -57,6 +58,7 @@ public class Labyrinthe implements Game {
                 if (hero.getX() != 0 && getCase(hero.getX() - 1, hero.getY()).estTraversable()) {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
                     hero.deplacerGauche();
+                    SonSingelton.getInstance().hero.play();
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
                 }
                 break;
@@ -65,6 +67,7 @@ public class Labyrinthe implements Game {
                 if (hero.getX() != getWidth() - 1 && getCase(hero.getX() + 1, hero.getY()).estTraversable()) {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
                     hero.deplacerDroite();
+                     SonSingelton.getInstance().hero.play();
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
                 }
                 break;
@@ -73,6 +76,7 @@ public class Labyrinthe implements Game {
                 if (hero.getY() != 0 && getCase(hero.getX(), hero.getY() - 1).estTraversable()) {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
                     hero.deplacerHaut();
+                     SonSingelton.getInstance().hero.play();
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
                 }
                 break;
@@ -81,6 +85,7 @@ public class Labyrinthe implements Game {
                 if (hero.getY() != getHeight() - 1 && getCase(hero.getX(), hero.getY() + 1).estTraversable()) {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
                     hero.deplacerBas();
+                     SonSingelton.getInstance().hero.play();
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
                 }
                 break;
