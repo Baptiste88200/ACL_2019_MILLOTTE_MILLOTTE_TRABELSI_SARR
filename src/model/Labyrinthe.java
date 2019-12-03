@@ -13,7 +13,7 @@ import model.monstres.MonstreVert;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import model.son.SonSingelton;
+import model.son.SonSingleton;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -39,10 +39,30 @@ public class Labyrinthe implements Game {
         finish = false;
         etageCourant = 1;
         monstres = new ArrayList<>();
-        MonstreFactory.creerMonstreVert(this);
-        MonstreFactory.creerFantome(this);
-
-
+        switch(getEtageCourant()){
+            case 1:
+                 for(int i = 0 ; i<2 ; i++){
+                 MonstreFactory.creerMonstreVert(this);
+                 MonstreFactory.creerFantome(this); } 
+                 break;
+            case 2:
+                for(int i = 0 ; i<3 ; i++){
+                 MonstreFactory.creerMonstreVert(this);
+                 MonstreFactory.creerFantome(this); }
+                break;
+                
+            case 3 :
+                 for(int i = 0 ; i<4 ; i++){
+                 MonstreFactory.creerMonstreVert(this);
+                 MonstreFactory.creerFantome(this); }
+                 break;
+                 
+            default:
+                for(int i = 0 ; i<5 ; i++){
+                MonstreFactory.creerMonstreVert(this);
+                MonstreFactory.creerFantome(this); }
+                break;            
+        }
     }
 
     /**
@@ -58,36 +78,44 @@ public class Labyrinthe implements Game {
                 if (hero.getX() != 0 && getCase(hero.getX() - 1, hero.getY()).estTraversable()) {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
                     hero.deplacerGauche();
-                    SonSingelton.getInstance().hero.play();
+                    SonSingleton.getInstance().hero.play();
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
                 }
+                else
+                    SonSingleton.getInstance().mur.play();               
                 break;
             case RIGHT:
                 hero.setAttaque(false);
                 if (hero.getX() != getWidth() - 1 && getCase(hero.getX() + 1, hero.getY()).estTraversable()) {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
                     hero.deplacerDroite();
-                     SonSingelton.getInstance().hero.play();
+                     SonSingleton.getInstance().hero.play();
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
                 }
+                 else
+                    SonSingleton.getInstance().mur.play();            
                 break;
             case UP:
                 hero.setAttaque(false);
                 if (hero.getY() != 0 && getCase(hero.getX(), hero.getY() - 1).estTraversable()) {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
                     hero.deplacerHaut();
-                     SonSingelton.getInstance().hero.play();
+                     SonSingleton.getInstance().hero.play();
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
                 }
+                else
+                    SonSingleton.getInstance().mur.play();            
                 break;
             case DOWN:
                 hero.setAttaque(false);
                 if (hero.getY() != getHeight() - 1 && getCase(hero.getX(), hero.getY() + 1).estTraversable()) {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
                     hero.deplacerBas();
-                     SonSingelton.getInstance().hero.play();
+                     SonSingleton.getInstance().hero.play();
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
                 }
+                else
+                    SonSingleton.getInstance().mur.play();            
                 break;
             case ENTREE:
                 Monstre monstre = hero.getMonstreProche();
@@ -211,6 +239,7 @@ public class Labyrinthe implements Game {
 
     public void changerEtage(){
         etageCourant++;
+        SonSingleton.getInstance().nextLevel.play();
     }
 
     public int getEtageCourant(){

@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
 public class MonstreVert extends Monstre {
 
     public MonstreVert(int x, int y, Labyrinthe labyrinthe) {
-        super(x, y, labyrinthe, ImageFactory.getSpriteMonstre1(), 4, 8, 1);
+        super(x, y, labyrinthe, ImageFactory.getSpriteMonstre1(), 4, 4, 1);
         setDeplacement(new DeplacementAEtoile(labyrinthe, this));
     }
 }
