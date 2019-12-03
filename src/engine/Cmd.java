@@ -2,8 +2,7 @@ package engine;
 
 /**
  * @author Horatiu Cirstea
- *
  */
 public enum Cmd {
-	 LEFT,RIGHT,UP,DOWN,IDLE,ENTREE;
+	LEFT, RIGHT, UP, DOWN, IDLE, ENTREE, PLAY, LOAD, NEW, ECHAP
 }

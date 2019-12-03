@@ -8,12 +8,11 @@ import model.creationLabyrinthe.CreationLabyrinthe;
 import model.factory.MonstreFactory;
 import model.monstres.Fantome;
 import model.monstres.Monstre;
-import model.monstres.MonstreVert;
+import model.son.SonSingleton;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import model.son.SonSingleton;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -72,6 +71,7 @@ public class Labyrinthe implements Game {
      */
     @Override
     public void evolve(Cmd commande) {
+        System.out.println(commande);
         switch (commande) {
             case LEFT:
                 hero.setAttaque(false);

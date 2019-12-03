@@ -15,10 +15,12 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
 		Labyrinthe game;
-		LabyrinthePainter painter;
-		HeroController controller;
-		GameEngineGraphical engine;
+		LabyrinthePainter painter = null;
+		HeroController controller = null;
+		GameEngineGraphical engine = null;
 		do {
+			if (engine != null)
+				engine.getGui().getFrame().dispose();
 			game = new Labyrinthe(new CreationAleatoire(25, 25));
 			painter = new LabyrinthePainter(game);
 			controller = new HeroController();

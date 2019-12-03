@@ -24,7 +24,6 @@ public class HeroController implements GameController {
     public HeroController() {
         this.commandeEnCours = Cmd.IDLE;
     }
-
     /**
      * quand on demande les commandes, le controleur retourne la commande en
      * cours
@@ -62,6 +61,8 @@ public class HeroController implements GameController {
             case (KeyEvent.VK_SPACE):
                 commandeEnCours = Cmd.ENTREE;
                 break;
+            case (KeyEvent.VK_ESCAPE):
+                commandeEnCours = Cmd.ECHAP;
 
 
         }
@@ -83,5 +84,6 @@ public class HeroController implements GameController {
     public void keyTyped(KeyEvent e) {
 
     }
+
 
 }

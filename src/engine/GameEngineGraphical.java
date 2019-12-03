@@ -1,8 +1,11 @@
 package engine;
 
+import model.menu.Menu;
+import model.menu.MenuController;
+
 /**
  * @author Horatiu Cirstea, Vincent Thomas
- *
+ * <p>
  * moteur de game generique.
  * On lui passe un game et un afficheur et il permet d'executer un game.
  */
@@ -22,6 +25,7 @@ public class GameEngineGraphical {
 	 * le controlleur a utiliser pour recuperer les commandes
 	 */
 	private GameController gameController;
+	private MenuController menuController;
 
 	/**
 	 * l'interface graphique
@@ -30,7 +34,7 @@ public class GameEngineGraphical {
 
 	/**
 	 * construit un moteur
-	 * 
+	 *
 	 * @param game
 	 *            game a lancer
 	 * @param gamePainter
@@ -44,6 +48,11 @@ public class GameEngineGraphical {
 		this.game = game;
 		this.gamePainter = gamePainter;
 		this.gameController = gameController;
+		this.menuController = new MenuController();
+		Menu menu = new Menu(gamePainter, menuController);
+		// creation de l'interface graphique
+		this.gui = new GraphicalInterface(this.gamePainter, this.gameController,menuController);
+
 	}
 
 	/**
@@ -51,25 +60,51 @@ public class GameEngineGraphical {
 	 */
 	public void run() throws InterruptedException {
 
-		// creation de l'interface graphique
-		this.gui = new GraphicalInterface(this.gamePainter,this.gameController);
-
 		// boucle de game
 		while (!this.game.isFinished()) {
 			// demande controle utilisateur
+			if (!this.gui.isMenuActif()) {
+				Cmd c = this.gameController.getCommand();
+				this.game.evolve(c);
+				if (c == Cmd.ECHAP) {
+					gui.activeMenu();
+				}
+			} else {
+				Cmd c = this.menuController.getCommand();
+				switch (c) {
+					case PLAY:
+						gui.desactiveMenu();
 
-			Cmd c = this.gameController.getCommand();
-			// fait evoluer le game
-			this.game.evolve(c);
-			// affiche le game
-			this.gui.paint();
-			// met en attente
-			Thread.sleep(60);
+						break;
+					case ECHAP:
+						gui.desactiveMenu();
+						break;
+					case NEW:
+						//newGame();
+						break;
+				}
+				menuController.setCommand(Cmd.IDLE);
+			}
+
 		}
 
 	}
 
 	public GraphicalInterface getGui() {
 		return gui;
+	}
+
+	public void newGame() {
+		gui.desactiveMenu();
+
+	}
+
+	private void loadFile(String dir, String file) {
+		if (file != null && dir != null)
+			System.out.println(file);
+	}
+
+	public void init() {
+
 	}
 }
