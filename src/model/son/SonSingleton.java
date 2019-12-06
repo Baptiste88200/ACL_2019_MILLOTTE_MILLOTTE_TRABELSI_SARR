@@ -23,7 +23,7 @@ public class SonSingleton {
     private SonSingleton() {
         this.state = false;
         path = FileSystems.getDefault().getPath("").toAbsolutePath();
-        allPath = "/sons/";
+        allPath = "./sons/";
         System.out.println(allPath);
 
         sonUrl = SonSingleton.class.getResource(allPath + "pas.wav");

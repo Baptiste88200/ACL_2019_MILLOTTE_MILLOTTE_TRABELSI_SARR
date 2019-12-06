@@ -38,30 +38,10 @@ public class Labyrinthe implements Game {
         finish = false;
         etageCourant = 1;
         monstres = new ArrayList<>();
-        switch(getEtageCourant()){
-            case 1:
-                 for(int i = 0 ; i<2 ; i++){
-                 MonstreFactory.creerMonstreVert(this);
-                 MonstreFactory.creerFantome(this); } 
-                 break;
-            case 2:
-                for(int i = 0 ; i<3 ; i++){
-                 MonstreFactory.creerMonstreVert(this);
-                 MonstreFactory.creerFantome(this); }
-                break;
-                
-            case 3 :
-                 for(int i = 0 ; i<4 ; i++){
-                 MonstreFactory.creerMonstreVert(this);
-                 MonstreFactory.creerFantome(this); }
-                 break;
-                 
-            default:
-                for(int i = 0 ; i<5 ; i++){
-                MonstreFactory.creerMonstreVert(this);
-                MonstreFactory.creerFantome(this); }
-                break;            
-        }
+        MonstreFactory.creerMonstreVert(this);
+        MonstreFactory.creerMonstreVert(this);
+        MonstreFactory.creerMonstreVert(this);
+
     }
 
     /**
