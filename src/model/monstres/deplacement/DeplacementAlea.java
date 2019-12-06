@@ -47,7 +47,7 @@ public class DeplacementAlea
                 }
                 break;
         }
-        ((Sol) labyrinthe.getCase(x, y)).declancher(monstre);
+       // ((Sol) labyrinthe.getCase(x, y)).declancher(monstre);
         return new int[]{x, y};
     }
 }

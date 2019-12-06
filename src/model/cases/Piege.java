@@ -5,6 +5,7 @@ import model.Personnage;
 import model.factory.ImageFactory;
 
 import java.awt.*;
+import model.Labyrinthe;
 
 public class Piege extends Sol {
 
@@ -13,7 +14,7 @@ public class Piege extends Sol {
     }
 
     @Override
-    public void declancher(Personnage p) {
+    public void declancher(Personnage p,Labyrinthe l) {
         p.subirDegat(1);
     }
 

@@ -5,6 +5,7 @@ import model.Personnage;
 import model.factory.ImageFactory;
 
 import java.awt.*;
+import model.Labyrinthe;
 
 public class Sol implements Case {
 
@@ -47,7 +48,7 @@ public class Sol implements Case {
         g.drawImage(ImageFactory.getSol(idImg), x * Constantes.tailleCase, y * Constantes.tailleCase, Constantes.tailleCase, Constantes.tailleCase, null);
     }
 
-    public void declancher(Personnage p) {
+    public void declancher(Personnage p,Labyrinthe l) {
     }
 
 }

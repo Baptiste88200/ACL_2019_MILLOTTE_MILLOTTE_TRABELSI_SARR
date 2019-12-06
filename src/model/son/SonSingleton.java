@@ -44,7 +44,7 @@ public class SonSingleton {
          sonUrl = SonSingleton.class.getResource(allPath+"Magique.wav");
          magic = Applet.newAudioClip(sonUrl);
 
-         sonUrl = SonSingleton.class.getResource(allPath+"deplacer.mp3");
+         sonUrl = SonSingleton.class.getResource(allPath+"Magique.wav");
          nextLevel = Applet.newAudioClip(sonUrl);
 
         // sonUrl = SonSingleton.class.getResource(allPath+"tresor.wav");

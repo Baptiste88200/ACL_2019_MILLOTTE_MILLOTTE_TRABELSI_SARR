@@ -16,7 +16,7 @@ public class Tresor extends Sol {
     }
 
     @Override
-    public void declancher(Personnage p) {
+    public void declancher(Personnage p,Labyrinthe labyrinthe) {
         if (p instanceof Hero) labyrinthe.setFinish(true);
     }
 

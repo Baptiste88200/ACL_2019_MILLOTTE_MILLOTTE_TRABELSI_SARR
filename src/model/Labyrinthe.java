@@ -2,6 +2,7 @@ package model;
 
 import engine.Cmd;
 import engine.Game;
+import java.util.List;
 import model.cases.Case;
 import model.cases.Sol;
 import model.creationLabyrinthe.CreationLabyrinthe;
@@ -38,9 +39,13 @@ public class Labyrinthe implements Game {
         finish = false;
         etageCourant = 1;
         monstres = new ArrayList<>();
-        MonstreFactory.creerMonstreVert(this);
-        MonstreFactory.creerMonstreVert(this);
-        MonstreFactory.creerMonstreVert(this);
+       
+                for(int i = 0 ; i<2*this.getEtageCourant() ;i++){
+                MonstreFactory.creerMonstreVert(this);
+                MonstreFactory.creerFantome(this);
+                } 
+        
+       
 
     }
 
@@ -51,6 +56,7 @@ public class Labyrinthe implements Game {
      */
     @Override
     public void evolve(Cmd commande) {
+        this.setFinish(!hero.enVie());
         switch (commande) {
             case LEFT:
                 hero.setAttaque(false);
@@ -97,13 +103,16 @@ public class Labyrinthe implements Game {
                     SonSingleton.getInstance().mur.play();
                 break;
             case ENTREE:
-                Monstre monstre = hero.getMonstreProche();
+                Monstre monstre = this.getMonstreProche();
                 hero.setAttaque(true);
+                SonSingleton.getInstance().attack.play();
                 if (monstre != null)
                     this.hero.attaquer(monstre);
                 break;
 
         }
+        if(hero.getControleAleatoire())
+            deplacementAleatoire(hero);
 
         Iterator<Monstre> iterator = monstres.iterator();
         while (iterator.hasNext()) {
@@ -114,7 +123,7 @@ public class Labyrinthe implements Game {
                 iterator.remove();
         }
 
-        ((Sol) cases[hero.getX()][hero.getY()]).declancher(hero);
+        ((Sol) cases[hero.getX()][hero.getY()]).declancher(hero,this);
 		/*if (!this.hero.enVie())
 			this.finish = !this.finish;*/
     }
@@ -224,5 +233,52 @@ public class Labyrinthe implements Game {
     public int getEtageCourant(){
         return etageCourant;
     }
+    
+    void deplacementAleatoire(Hero hero) {
+        switch ((int) (Math.random() * 4)) {
+            case 0:
+                if (this.estTraversable(hero.getX() + 1 , hero.getY() )) {
+                    hero.setX(hero.getX()+1);
+                }
+                break;
+            case 1:
+              if (this.estTraversable(hero.getX() - 1 , hero.getY() )) {
+                    hero.setX(hero.getX()+1);
+                }
+                break;
+            case 2:
+              if (this.estTraversable(hero.getX() , hero.getY()+1 )) {
+                    hero.setX(hero.getY()+1);
+                }
+                break;
+            case 3:
+               if (this.estTraversable(hero.getX()  , hero.getY()-1 )) {
+                    hero.setX(hero.getX()+1);
+                }
+                break;
+        }
+       
+        hero.setCptAttaque(hero.getCptAttaque() -2);
+        if (hero.getCptAttaque() <= 0) {
+            hero.setControleAleatoire(false);
+        }
+        System.out.println(hero.getCptAttaque());
+    }
+
+    /**
+     *
+     * @param hero the value of hero
+     */
+   public Monstre getMonstreProche(){
+        int[][] tab = {{0, 0}, {1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        for (Monstre m : monstres) {
+            for (int[] c : tab) {
+                if (hero.getX() + c[0] == m.getX() && hero.getY() + c[1] == m.getY())
+                    return m;
+            }
+        }
+        return null;
+    }
+
 
 }

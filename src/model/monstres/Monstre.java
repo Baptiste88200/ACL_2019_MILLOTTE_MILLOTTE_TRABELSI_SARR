@@ -74,15 +74,15 @@ public abstract class Monstre implements Personnage {
             }
 
             cptVitesse = -1;
-            ((Sol) (labyrinthe.getCase(x, y))).declancher(this);
+           // ((Sol) (labyrinthe.getCase(x, y))).declancher(this);
         }
         cptVitesse++;
 
     }
 
     @Override
-    public void teleporterAleatoirement() {
-        int[] cord = labyrinthe.getCordTraversable();
+    public void teleporterAleatoirement(int[] cord) {
+ 
         x = cord[0];
         y = cord[1];
     }

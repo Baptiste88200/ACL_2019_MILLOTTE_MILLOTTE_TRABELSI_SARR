@@ -26,7 +26,7 @@ public class Passage extends Sol {
     }
 
     @Override
-    public void declancher(Personnage p) {
+    public void declancher(Personnage p,Labyrinthe l) {
         if (p instanceof Hero) {
             CreationLabyrinthe creationLabyrinthe;
             boolean creationAlea = false;

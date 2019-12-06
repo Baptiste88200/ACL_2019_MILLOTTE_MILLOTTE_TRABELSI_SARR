@@ -2,7 +2,7 @@ package model;
 
 public interface Personnage {
 
-    void teleporterAleatoirement();
+    void teleporterAleatoirement(int[] cord);
 
     void subirDegat(int degat);
 
