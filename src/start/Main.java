@@ -13,24 +13,19 @@ import javax.swing.*;
  */
 public class Main {
 
-	public static void main(String[] args) {
-		Labyrinthe game = null;
-		LabyrinthePainter painter = null;
-		HeroController controller = null;
-		GameEngineGraphical engine = null;
+	public static void main(String[] args) throws InterruptedException {
+		Labyrinthe game;
+		LabyrinthePainter painter;
+		HeroController controller;
+		GameEngineGraphical engine;
 		do {
-			if (engine != null)
-				engine.getGui().getFrame().dispose();
 			game = new Labyrinthe(new CreationAleatoire(25, 25));
 			painter = new LabyrinthePainter(game);
 			controller = new HeroController();
+
 			// classe qui lance le moteur de jeu generique
 			engine = new GameEngineGraphical(game, painter, controller);
-			try {
-				engine.run();
-			} catch (InterruptedException e) {
-				break;
-			}
+			engine.run();
 		} while (JOptionPane.showConfirmDialog(engine.getGui().getFrame(), (game.getHero().enVie() ? "Vous avez gagnez" : "Vous avez perdu") + "!!!\n\nVoulez vous continuez")
 				== JOptionPane.YES_OPTION
 		);

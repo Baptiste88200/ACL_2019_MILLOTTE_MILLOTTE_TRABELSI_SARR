@@ -2,16 +2,18 @@ package engine;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
+ *
  */
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+
+import javax.swing.JPanel;
 
 public class DrawingPanel extends JPanel {
 
 	/**
-	 *
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 

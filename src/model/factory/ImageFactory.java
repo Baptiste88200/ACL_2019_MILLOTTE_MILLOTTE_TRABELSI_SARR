@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ImageFactory {
-     private static ImageFactory instance = null;
 
     private static ImageIcon sol1 = new ImageIcon("./ressources/img/sol1.jpeg");
     private static ImageIcon sol2 = new ImageIcon("./ressources/img/sol2.jpeg");
@@ -119,10 +118,6 @@ public class ImageFactory {
                 new ImageIcon("./ressources/img/loup/loup-g2.png").getImage(),
                 new ImageIcon("./ressources/img/loup/loup-d1.png").getImage(),
                 new ImageIcon("./ressources/img/loup/loup-d2.png").getImage());
-    }
-    
-      public static ImageFactory getInstance() {
-        return instance;
     }
 
 }

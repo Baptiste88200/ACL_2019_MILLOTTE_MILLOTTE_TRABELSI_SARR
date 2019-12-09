@@ -26,37 +26,21 @@ public class Passage extends Sol {
     }
 
     @Override
-    public void declancher(Personnage p,Labyrinthe l) {
+    public void declancher(Personnage p) {
         if (p instanceof Hero) {
             CreationLabyrinthe creationLabyrinthe;
-            boolean creationAlea = false;
             labyrinthe.changerEtage();
             if(labyrinthe.getEtageCourant() == Constantes.NB_ETAGE){ //Si c'est le dernier niveau
                 creationLabyrinthe = new CreationFichierTexte("dernier-niveau.txt");
             }else{
                 creationLabyrinthe = new CreationAleatoire(largeur, hauteur);
-                creationAlea = true;
             }
             labyrinthe.supprimerLesMonstres();
             labyrinthe.reinitialiserPositionHero();
             creationLabyrinthe.creerLabyrinthe(labyrinthe);
-            if(creationAlea) {
-                if (labyrinthe.getEtageCourant() <= Constantes.NB_ETAGE / 3) {
-                    MonstreFactory.creerMonstreVert(labyrinthe);
-                    MonstreFactory.creerMonstreVert(labyrinthe);
-                    MonstreFactory.creerMonstreVert(labyrinthe);
-                } else if (labyrinthe.getEtageCourant() <= Constantes.NB_ETAGE * 2 / 3) {
-                    MonstreFactory.creerMonstreVert(labyrinthe);
-                    MonstreFactory.creerFantome(labyrinthe);
-                    MonstreFactory.creerMonstreVert(labyrinthe);
-                } else {
-                    MonstreFactory.creerFantome(labyrinthe);
-                    MonstreFactory.creerLoup(labyrinthe);
-                    MonstreFactory.creerLoup(labyrinthe);
-                    MonstreFactory.creerLoup(labyrinthe);
-                }
-            }
-
+            MonstreFactory.creerMonstreVert(labyrinthe);
+            MonstreFactory.creerFantome(labyrinthe);
+            MonstreFactory.creerLoup(labyrinthe);
         }
     }
 

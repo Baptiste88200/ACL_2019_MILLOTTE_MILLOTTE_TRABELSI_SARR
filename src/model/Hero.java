@@ -1,19 +1,31 @@
 package model;
 
+import model.cases.Sol;
 import model.factory.ImageFactory;
+import model.monstres.Monstre;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+
+import static model.Constantes.DIRECTION;
 import static model.Constantes.INITIAL_SCORE;
+import model.monstres.MonstreVert;
 
 public class Hero implements Personnage {
 
     private int x, y;
-   
+    private Labyrinthe labyrinthe;
     private int score;
-    int direction;
-    
+    private int direction;
     private int degat;
-    Sprite sprite;
+    private Sprite sprite;
     private boolean attaque;
     private boolean controleAleatoire;
     private int cptAttaque;
@@ -22,16 +34,13 @@ public class Hero implements Personnage {
     public Hero(Labyrinthe l) {
         this.x = -1;
         this.y = -1;
+        labyrinthe = l;
         degat = 1;
         score = INITIAL_SCORE;
         sprite = ImageFactory.getSpriteHero();
         attaque = false;
-        setControleAleatoire(false) ;
-        setCptAttaque(0);
-    }
-
-    public boolean getControleAleatoire() {
-        return controleAleatoire;
+        controleAleatoire = false;
+        cptAttaque = 0;
     }
 
     public void afficher(Graphics2D g) {
@@ -63,19 +72,24 @@ public class Hero implements Personnage {
 
         }
     }
- public void deplacerGauche() {
-        if (!this.getControleAleatoire()) {
-            this.setX(this.getX()-1);
+
+    public void deplacerGauche() {
+        if(!controleAleatoire) {
+            this.x--;
+        }else {
+            deplacementAleatoire();
         }
-        this.setCptAttaque(Math.max(0,this.getCptAttaque()- 1));
-        this.direction = Constantes.GAUCHE;
-        this.sprite.setDirection(this.direction);
+        cptAttaque = Math.max(0,cptAttaque-1);
+        direction = Constantes.GAUCHE;
+        sprite.setDirection(direction);
+
     }
 
-
     public void deplacerDroite() {
-        if(!getControleAleatoire()) {
+        if(!controleAleatoire) {
             this.x++;
+        }else {
+            deplacementAleatoire();
         }
         cptAttaque = Math.max(0,cptAttaque-1);
         direction = Constantes.DROITE;
@@ -83,8 +97,10 @@ public class Hero implements Personnage {
     }
 
     public void deplacerHaut() {
-        if(!getControleAleatoire()) {
+        if(!controleAleatoire) {
             this.y--;
+        }else {
+            deplacementAleatoire();
         }
         cptAttaque = Math.max(0,cptAttaque-1);
         direction = Constantes.HAUT;
@@ -93,14 +109,43 @@ public class Hero implements Personnage {
     }
 
     public void deplacerBas() {
-        if(!getControleAleatoire()){
+        if(!controleAleatoire){
             this.y++;
+        }else {
+            deplacementAleatoire();
         }
         cptAttaque = Math.max(0,cptAttaque-1);
         direction = Constantes.BAS;
         sprite.setDirection(direction);
     }
 
+    private void deplacementAleatoire(){
+        switch ((int)(Math.random()*4)){
+            case 0 :
+                if(labyrinthe.estTraversable(x+1,y)){
+                    x++;
+                }
+                break;
+            case 1:
+                if(labyrinthe.estTraversable(x-1,y)){
+                    x--;
+                }
+                break;
+            case 2:
+                if(labyrinthe.estTraversable(x,y+1)){
+                    y++;
+                }
+                break;
+            case 3:
+                if(labyrinthe.estTraversable(x,y-1)){
+                    y--;
+                }
+                break;
+        }
+        cptAttaque -= 2;
+        if(cptAttaque<=0)controleAleatoire = false;
+        //System.out.println(cptAttaque);
+    }
 
     public int getX() {
         return x;
@@ -119,34 +164,31 @@ public class Hero implements Personnage {
     }
 
     @Override
-    public void teleporterAleatoirement(int[] cord) {
+    public void teleporterAleatoirement() {
+        int[] cord = labyrinthe.getCordTraversable();
         x = cord[0];
         y = cord[1];
-     
-     //   SonSingleton.getInstance().magic.play();
+        ((Sol) labyrinthe.getCase(x, y)).setTraversable(false);
     }
 
     @Override
     public void attaquer(Personnage monstre) {
         int[][] tab = {{0, 0}, {1, 0}, {-1, 0}, {0, 1}, {0, -1},{-1,-1},{-1,1},{1,-1},{1,1}};
-
-
+        int i = 0;
         for (int[] c : tab) {
-            if (getX() + c[0] == monstre.getX() && getY() + c[1] == getY()) {
-                monstre.subirDegat(degat);
-                //SonSingleton.getInstance().attack.play();
+            if (getX() + c[0] == monstre.getX() && getY() + c[1] == monstre.getY()) {
+                monstre.subirDegat(degat);i++;
                 break;
             }
         }
-        if (monstre.getX() == this.x && monstre.getY() == this.y) {
-            subirDegat(0);
-        }
+
     }
 
     @Override
     public void subirDegat(int d) {
         this.score -= d;
-       
+        if (score <= 0)
+            labyrinthe.setFinish(true);
     }
 
     @Override
@@ -154,7 +196,17 @@ public class Hero implements Personnage {
         return score > 0;
     }
 
-    
+    public Monstre getMonstreProche() {
+        int[][] tab = {{0, 0}, {1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        for (Monstre m : this.labyrinthe.getMonstres()) {
+            for (int[] c : tab) {
+                if (this.getX() + c[0] == m.getX() && this.getY() + c[1] == m.getY())
+                    return m;
+            }
+        }
+        return null;
+    }
+
     public int getPV() {
         return score;
     }
@@ -165,23 +217,11 @@ public class Hero implements Personnage {
             direction = 0;
 
 
-        if(getCptAttaque() > 50){
-            setControleAleatoire(true) ;
+        if(cptAttaque > 50){
+            controleAleatoire = true;
         }else {
-            setCptAttaque(getCptAttaque()+1);
+            cptAttaque++;
             this.attaque = attaque;
         }
-    }
-
-    public void setCptAttaque(int x ) {
-         cptAttaque = x;
-    }
-
-    public int getCptAttaque() {
-        return cptAttaque;
-    }
-
-    void setControleAleatoire(boolean b) {
-        this.controleAleatoire=b;
     }
 }

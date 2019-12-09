@@ -5,7 +5,6 @@ import model.Personnage;
 import model.factory.ImageFactory;
 
 import java.awt.*;
-import model.Labyrinthe;
 
 public class CaseMagique extends Sol {
 
@@ -14,8 +13,8 @@ public class CaseMagique extends Sol {
     }
 
     @Override
-    public void declancher(Personnage p,Labyrinthe l) {
-        p.teleporterAleatoirement(l.getCordTraversable());
+    public void declancher(Personnage p) {
+        p.teleporterAleatoirement();
         setTraversable(true);
     }
 

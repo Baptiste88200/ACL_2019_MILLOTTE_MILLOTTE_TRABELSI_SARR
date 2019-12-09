@@ -2,14 +2,13 @@ package model;
 
 import engine.Cmd;
 import engine.Game;
-import java.util.List;
 import model.cases.Case;
 import model.cases.Sol;
 import model.creationLabyrinthe.CreationLabyrinthe;
 import model.factory.MonstreFactory;
 import model.monstres.Fantome;
 import model.monstres.Monstre;
-import model.son.SonSingleton;
+import model.monstres.MonstreVert;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -39,13 +38,8 @@ public class Labyrinthe implements Game {
         finish = false;
         etageCourant = 1;
         monstres = new ArrayList<>();
-       
-                for(int i = 0 ; i<2*this.getEtageCourant() ;i++){
-                MonstreFactory.creerMonstreVert(this);
-                MonstreFactory.creerFantome(this);
-                } 
-        
-       
+        MonstreFactory.creerMonstreVert(this);
+        MonstreFactory.creerFantome(this);
 
     }
 
@@ -56,63 +50,47 @@ public class Labyrinthe implements Game {
      */
     @Override
     public void evolve(Cmd commande) {
-        this.setFinish(!hero.enVie());
         switch (commande) {
             case LEFT:
                 hero.setAttaque(false);
                 if (hero.getX() != 0 && getCase(hero.getX() - 1, hero.getY()).estTraversable()) {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
                     hero.deplacerGauche();
-                    SonSingleton.getInstance().hero.play();
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
                 }
-                else
-                   SonSingleton.getInstance().mur.play();
                 break;
             case RIGHT:
                 hero.setAttaque(false);
                 if (hero.getX() != getWidth() - 1 && getCase(hero.getX() + 1, hero.getY()).estTraversable()) {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
                     hero.deplacerDroite();
-                    SonSingleton.getInstance().hero.play();
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
                 }
-                 else
-                    SonSingleton.getInstance().mur.play();
                 break;
             case UP:
                 hero.setAttaque(false);
                 if (hero.getY() != 0 && getCase(hero.getX(), hero.getY() - 1).estTraversable()) {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
                     hero.deplacerHaut();
-                     SonSingleton.getInstance().hero.play();
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
                 }
-                else
-                    SonSingleton.getInstance().mur.play();
                 break;
             case DOWN:
                 hero.setAttaque(false);
                 if (hero.getY() != getHeight() - 1 && getCase(hero.getX(), hero.getY() + 1).estTraversable()) {
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(true);
                     hero.deplacerBas();
-                     SonSingleton.getInstance().hero.play();
                     ((Sol) cases[hero.getX()][hero.getY()]).setTraversable(false);
                 }
-                else
-                    SonSingleton.getInstance().mur.play();
                 break;
             case ENTREE:
-                Monstre monstre = this.getMonstreProche();
+                Monstre monstre = hero.getMonstreProche();
                 hero.setAttaque(true);
-                SonSingleton.getInstance().attack.play();
                 if (monstre != null)
                     this.hero.attaquer(monstre);
                 break;
 
         }
-        if(hero.getControleAleatoire())
-            deplacementAleatoire(hero);
 
         Iterator<Monstre> iterator = monstres.iterator();
         while (iterator.hasNext()) {
@@ -123,9 +101,10 @@ public class Labyrinthe implements Game {
                 iterator.remove();
         }
 
-        ((Sol) cases[hero.getX()][hero.getY()]).declancher(hero,this);
+        ((Sol) cases[hero.getX()][hero.getY()]).declancher(hero);
 		/*if (!this.hero.enVie())
 			this.finish = !this.finish;*/
+
     }
 
     /**
@@ -227,58 +206,10 @@ public class Labyrinthe implements Game {
 
     public void changerEtage(){
         etageCourant++;
-        SonSingleton.getInstance().nextLevel.play();
     }
 
     public int getEtageCourant(){
         return etageCourant;
     }
-    
-    void deplacementAleatoire(Hero hero) {
-        switch ((int) (Math.random() * 4)) {
-            case 0:
-                if (this.estTraversable(hero.getX() + 1 , hero.getY() )) {
-                    hero.setX(hero.getX()+1);
-                }
-                break;
-            case 1:
-              if (this.estTraversable(hero.getX() - 1 , hero.getY() )) {
-                    hero.setX(hero.getX()+1);
-                }
-                break;
-            case 2:
-              if (this.estTraversable(hero.getX() , hero.getY()+1 )) {
-                    hero.setX(hero.getY()+1);
-                }
-                break;
-            case 3:
-               if (this.estTraversable(hero.getX()  , hero.getY()-1 )) {
-                    hero.setX(hero.getX()+1);
-                }
-                break;
-        }
-       
-        hero.setCptAttaque(hero.getCptAttaque() -2);
-        if (hero.getCptAttaque() <= 0) {
-            hero.setControleAleatoire(false);
-        }
-        System.out.println(hero.getCptAttaque());
-    }
-
-    /**
-     *
-     * @param hero the value of hero
-     */
-   public Monstre getMonstreProche(){
-        int[][] tab = {{0, 0}, {1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-        for (Monstre m : monstres) {
-            for (int[] c : tab) {
-                if (hero.getX() + c[0] == m.getX() && hero.getY() + c[1] == m.getY())
-                    return m;
-            }
-        }
-        return null;
-    }
-
 
 }
