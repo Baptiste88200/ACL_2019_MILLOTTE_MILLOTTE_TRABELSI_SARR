@@ -84,10 +84,11 @@ public class Labyrinthe implements Game {
                 }
                 break;
             case ENTREE:
-                Monstre monstre = hero.getMonstreProche();
+                ArrayList<Monstre> monstres = hero.getMonstreProche();
                 hero.setAttaque(true);
-                if (monstre != null)
-                    this.hero.attaquer(monstre);
+                hero.attaquer(monstres);
+
+
                 break;
 
         }
@@ -212,4 +213,7 @@ public class Labyrinthe implements Game {
         return etageCourant;
     }
 
+    public void casserMur(int x, int y){
+        cases[x][y] = new Sol();
+    }
 }

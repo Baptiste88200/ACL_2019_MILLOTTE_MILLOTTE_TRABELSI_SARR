@@ -1,6 +1,7 @@
 package start;
 
 import engine.GameEngineGraphical;
+import model.Constantes;
 import model.HeroController;
 import model.Labyrinthe;
 import model.LabyrinthePainter;
@@ -19,7 +20,7 @@ public class Main {
 		HeroController controller;
 		GameEngineGraphical engine;
 		do {
-			game = new Labyrinthe(new CreationAleatoire(25, 25));
+			game = new Labyrinthe(new CreationAleatoire(Constantes.TAILLE, Constantes.TAILLE));
 			painter = new LabyrinthePainter(game);
 			controller = new HeroController();
 

@@ -1,5 +1,6 @@
 package model;
 
+import model.cases.Case;
 import model.cases.Sol;
 import model.factory.ImageFactory;
 import model.monstres.Monstre;
@@ -10,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -171,18 +173,31 @@ public class Hero implements Personnage {
         ((Sol) labyrinthe.getCase(x, y)).setTraversable(false);
     }
 
-    @Override
-    public void attaquer(Personnage monstre) {
+
+    public void attaquer(ArrayList<Monstre> monstres) {
         int[][] tab = {{0, 0}, {1, 0}, {-1, 0}, {0, 1}, {0, -1},{-1,-1},{-1,1},{1,-1},{1,1}};
-        int i = 0;
+        boolean estMonstre = false;
         for (int[] c : tab) {
-            if (getX() + c[0] == monstre.getX() && getY() + c[1] == monstre.getY()) {
-                monstre.subirDegat(degat);i++;
-                break;
+            for(Monstre monstre : monstres){
+                if (getX() + c[0] == monstre.getX() && getY() + c[1] == monstre.getY()) {
+                    attaquer(monstre);
+                    estMonstre = true;
+                }
             }
+            if(x + c[0] >= 0 && x + c[0] < Constantes.TAILLE && y + c[1] >=0 && y + c[1] < Constantes.TAILLE){
+                if(!estMonstre && !labyrinthe.getCase(x + c[0],y + c[1]).estTraversable()){
+                    labyrinthe.casserMur(x + c[0],y + c[1] );
+                }
+            }
+            estMonstre = false;
         }
 
     }
+
+    public void attaquer(Personnage monstre) {
+        monstre.subirDegat(degat);
+    }
+
 
     @Override
     public void subirDegat(int d) {
@@ -196,15 +211,16 @@ public class Hero implements Personnage {
         return score > 0;
     }
 
-    public Monstre getMonstreProche() {
+    public ArrayList<Monstre> getMonstreProche() {
         int[][] tab = {{0, 0}, {1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        ArrayList<Monstre> monstres = new ArrayList<>();
         for (Monstre m : this.labyrinthe.getMonstres()) {
             for (int[] c : tab) {
                 if (this.getX() + c[0] == m.getX() && this.getY() + c[1] == m.getY())
-                    return m;
+                    monstres.add(m);
             }
         }
-        return null;
+        return monstres;
     }
 
     public int getPV() {
@@ -217,7 +233,7 @@ public class Hero implements Personnage {
             direction = 0;
 
 
-        if(cptAttaque > 50){
+        if(cptAttaque > 5000){
             controleAleatoire = true;
         }else {
             cptAttaque++;
