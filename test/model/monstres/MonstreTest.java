@@ -6,6 +6,7 @@
  */
 package model.monstres;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import model.Labyrinthe;
@@ -81,9 +82,8 @@ public class MonstreTest {
      *
      *
      */
-    @Test
-
-    public void testTeleporterAleatoirement() {
+    
+  /* public void testTeleporterAleatoirement() {
 
         System.out.println("teleporterAleatoirement");
 
@@ -104,7 +104,7 @@ public class MonstreTest {
             // TODO review the generated test code and remove the default call to fail.
             assertNotEquals(x, mon.getX());
 
-            assertNotEquals(y, mon.getY());
+           else assertNotEquals(y, mon.getY());
 
         });
 
@@ -113,7 +113,7 @@ public class MonstreTest {
     /*
 
 
-
+*/
 
     /**
 
@@ -127,7 +127,6 @@ public class MonstreTest {
 
      */
     @Test
-
     public void testSubirDegat() {
 
         System.out.println("subirDegat Monstre");
@@ -135,18 +134,17 @@ public class MonstreTest {
         int d = 2;
         labyrinthe = new Labyrinthe(new CreationAleatoire(25, 25));
         monstres = labyrinthe.getMonstres();
-        Monstre m =labyrinthe.getHero().getMonstreProche();
+        ArrayList<Monstre> m =labyrinthe.getHero().getMonstreProche();
         labyrinthe.getHero().setAttaque(true);
-       if (m != null){
-           int ancienPV=m.getScore();
-           labyrinthe.getHero().attaquer(m);
-          assertTrue(ancienPV > m.getScore());
-       }
+        labyrinthe.getMonstres().forEach((mon) -> {
+           
+           int ancienPV= mon.getScore();
+           labyrinthe.getHero().attaquer(mon);
+          assertTrue(ancienPV > mon.getScore());
+       
+        });        
 
     }
-
-
-
 
      
     /**
@@ -172,13 +170,14 @@ public class MonstreTest {
         int d = 2;
         labyrinthe = new Labyrinthe(new CreationAleatoire(25, 25));
         monstres = labyrinthe.getMonstres();
-        Monstre m =labyrinthe.getHero().getMonstreProche();
+        ArrayList<Monstre> m =labyrinthe.getHero().getMonstreProche();
         labyrinthe.getHero().setAttaque(true);
-       if (m != null){
+        labyrinthe.getMonstres().forEach((mon) -> {
+           
            int ancienPV=labyrinthe.getHero().getPV();
-          m.attaquer(labyrinthe.getHero());
+           mon.attaquer(labyrinthe.getHero());
           assertTrue(ancienPV > labyrinthe.getHero().getPV());
-       }
+       });
     }
 
     /**
