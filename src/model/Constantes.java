@@ -9,7 +9,5 @@ public class Constantes {
 
     public final static int BAS = 0, HAUT = 2, GAUCHE = 1, DROITE = 3;
 
-    public enum DIRECTION {
-        HAUT, BAS, GAUCHE, DROITE
-    }
+
 }

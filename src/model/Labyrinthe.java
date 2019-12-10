@@ -103,8 +103,6 @@ public class Labyrinthe implements Game {
         }
 
         ((Sol) cases[hero.getX()][hero.getY()]).declancher(hero);
-		/*if (!this.hero.enVie())
-			this.finish = !this.finish;*/
 
     }
 
@@ -173,7 +171,7 @@ public class Labyrinthe implements Game {
         ((Sol) cases[x][y]).setTraversable(traversable);
     }
 
-    // Retourne les cordonnÃ©es d'une case traversable
+    // Retourne les cordonnees d'une case traversable
     public int[] getCordTraversable() {
         int x = (int) (Math.random() * cases.length);
         int y = (int) (Math.random() * cases[0].length);
@@ -184,12 +182,6 @@ public class Labyrinthe implements Game {
         } else {
             return getCordTraversable();
         }
-    }
-
-    public void creerMonstreVert() {
-        int[] pos = getCordTraversable();
-       // ajouterMonstre(new MonstreVert(pos[0], pos[1], this));
-        ajouterMonstre(new Fantome(pos[0], pos[1], this));
     }
 
     public void setFinish(boolean finish) {
