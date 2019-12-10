@@ -144,9 +144,8 @@ public class Hero implements Personnage {
                 }
                 break;
         }
-        cptAttaque -= 2;
+        cptAttaque -= 4;
         if(cptAttaque<=0)controleAleatoire = false;
-        //System.out.println(cptAttaque);
     }
 
     public int getX() {
@@ -233,7 +232,7 @@ public class Hero implements Personnage {
             direction = 0;
 
 
-        if(cptAttaque > 5000){
+        if(cptAttaque > 20){
             controleAleatoire = true;
         }else {
             cptAttaque++;

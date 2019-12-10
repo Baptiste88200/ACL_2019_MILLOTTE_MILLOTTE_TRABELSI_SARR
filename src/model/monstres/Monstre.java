@@ -93,7 +93,6 @@ public abstract class Monstre implements Personnage {
 
     @Override
     public void subirDegat(int d) {
-        System.out.println(score);
         score -= d;
         if (score <= 0)
             labyrinthe.setTraversable(x, y, true);

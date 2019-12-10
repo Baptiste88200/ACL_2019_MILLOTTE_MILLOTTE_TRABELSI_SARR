@@ -38,9 +38,20 @@ public class Passage extends Sol {
             labyrinthe.supprimerLesMonstres();
             labyrinthe.reinitialiserPositionHero();
             creationLabyrinthe.creerLabyrinthe(labyrinthe);
-            MonstreFactory.creerMonstreVert(labyrinthe);
-            MonstreFactory.creerFantome(labyrinthe);
-            MonstreFactory.creerLoup(labyrinthe);
+            if (labyrinthe.getEtageCourant() <= Constantes.NB_ETAGE / 3) {
+                MonstreFactory.creerMonstreVert(labyrinthe);
+                MonstreFactory.creerMonstreVert(labyrinthe);
+                MonstreFactory.creerMonstreVert(labyrinthe);
+            } else if (labyrinthe.getEtageCourant() <= Constantes.NB_ETAGE * 2 / 3) {
+                MonstreFactory.creerMonstreVert(labyrinthe);
+                MonstreFactory.creerFantome(labyrinthe);
+                MonstreFactory.creerMonstreVert(labyrinthe);
+            } else {
+                MonstreFactory.creerFantome(labyrinthe);
+                MonstreFactory.creerLoup(labyrinthe);
+                MonstreFactory.creerLoup(labyrinthe);
+                MonstreFactory.creerLoup(labyrinthe);
+            }
         }
     }
 

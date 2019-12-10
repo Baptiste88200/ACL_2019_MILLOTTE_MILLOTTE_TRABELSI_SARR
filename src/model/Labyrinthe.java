@@ -39,7 +39,7 @@ public class Labyrinthe implements Game {
         etageCourant = 1;
         monstres = new ArrayList<>();
         MonstreFactory.creerMonstreVert(this);
-        MonstreFactory.creerFantome(this);
+        MonstreFactory.creerMonstreVert(this);
 
     }
 
